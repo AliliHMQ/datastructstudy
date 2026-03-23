@@ -98,3 +98,17 @@ int main(){
     }
     return 0;
 }*/
+
+//逻辑判断是否为闰年
+#include <stdio.h>
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    if((n%4==0 && n%100!=0) || n%400==0){
+        printf("闰年\n");
+    }else{
+        printf("不是闰年\n");
+    }
+    return 0;
+}

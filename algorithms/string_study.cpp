@@ -29,14 +29,39 @@ int main(){
 }*/
 
 //strlen() 语法    strings.cpp -- strong strings in an array
-#include <iostream>
+/*#include <iostream>
 #include <cstring>
 using namespace std;
 
 int main(){
     const int Size=15;
-    char name1[Size];               //empty array
+    char name1[Size];              //empty array  
     char name2[Size]="c++isgood";   //initialized array 已初始化的数组 
-    //Note: some imle
+    char name3[Size]={};
+    cin >> name1;                   
+    cout << sizeof(name1) << endl;  //整个字符数组在内存里面占用的字节多少
+    cout << strlen(name2) << endl;   
+    name2[3]='\0';
+    cout << name2 << endl;       
+    cout << name3 << endl;      //这里定义的空输入的初始化，字符数组里面全是 '\0'
+    return 0;
+}*/
+
+//推测甜点喜欢的交互语言沟通
+#include <iostream>
+using namespace std;
+
+int main(){
+    const int Arsize=20;
+    char name[Arsize]; //定义用户名字
+    char dessert[Arsize]; //甜点名
+
+    //主要交互部分
+    cout << "Hi!What's your name?\n";
+    cin >> name;
+    cout << "Oh,I know!So,"<< name << "! what's your favorit dessert?\n";
+    cin >> dessert;
+    cout << "Here you are!Now I know your favorit dessert is " << dessert;  //哈哈注意这里的dessert应该是单个单词，不然只能出第一个连续的词
     return 0;
 }
+
