@@ -212,35 +212,33 @@ using namespace std;
 
 long long gcd(long long a, long long b) {
     // 辗转相除法求最大公约数
-    while (b != 0) {
-        long long t = a % b;
-        a = b;
-        b = t;
+    while (b!=0) {
+        long long t=a%b;
+        a=b;
+        b=t;
     }
     return a;
 }
 
 int main() {
     int n;
-    scanf("%d", &n);
-    long long re = 0;      // 用于记录所有单点区间的 gcd
-    int flag = 0;          // 标记是否存在长度 ≥2 的区间
+    scanf("%d",&n);
+    long long re=0;      // 用于记录所有单点区间的 gcd
+    int flag=0;          // 标记是否存在长度 ≥2 的区间
 
-    for (int i = 0; i < n; i++) {
-        long long l, r;
-        scanf("%lld %lld", &l, &r);
-        if (l < r) {
-            flag = 1;      // 发现一个区间包含至少两个连续整数
+    for (int i=0;i<n;i++) {
+        long long l,r;
+        scanf("%lld %lld",&l,&r);
+        if(l<r){
+            flag=1;      
         }
-        // 如果还没有发现长度 ≥2 的区间，就累计单点的 gcd
-        if (!flag) {
-            if (re == 0) re = l;      // 第一个单点
-            else re = gcd(re, l);     // 与后面的单点求 gcd
+        if(!flag){
+            if (re==0)re=l;      // 第一个单点
+            else re=gcd(re,l);     // 与后面的单点求gcd
         }
     }
-
     if (flag) printf("1\n");
-    else printf("%lld\n", re);
+    else printf("%lld\n",re);
 
     return 0;
 }
