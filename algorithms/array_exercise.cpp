@@ -52,7 +52,7 @@ int main(){
 
 //彩票摇奖
 //数组存储中奖的七位数
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 int main(){
@@ -84,6 +84,167 @@ int main(){
         if(i>0){
             printf(" ");
         }
+    }
+    return 0;
+}*/
+
+//幻方
+/*这个是一个看不懂版本
+#include<bits/stdc++.h>
+using namespace std;
+int a[40][40];
+int main(){
+    int n;
+	cin>>n;
+	int x=1,y=n/2+1;
+	for(int i=1;i<=n*n;i++){
+		a[x][y]=i;
+		if(x==1&&y==n)x++;
+		else if(a[x-1][y+1])x++;
+		else if(x==1)x=n,y++;
+		else if(y==n)x--,y=1;
+		else x--,y++;
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+		    cout<<a[i][j]<<" ";
+		}
+		cout<<"\n";
+	}
+	return 0;
+}
+
+*/
+
+//幻方但简单版本     but I stil don't know!
+/*#include <iostream>
+#include <cmath>
+#include <cstdio>
+using namespace std;
+
+const int M=50;
+int n,rb,downb;  //rb代表右边界
+int map[M][M];      //初始化数组
+int stuffi,stuffj;  //填充k的位置
+
+void calculate(int ii,int jj){
+    stuffi = stuffj =0; //初始化
+    if(ii == 1 && jj !=n){ //若k-1在第一行但不在最后一列
+        stuffi = n;
+        stuffj = jj + 1;
+        return;
+    }else if(jj==n && ii!=1){
+        stuffi = n;
+
+    }
+}
+
+int main(){
+    
+    return 0;
+}*/
+
+//数字显示屏
+#include <iostream>
+using namespace std;
+
+const int n1=350,n2=6;
+char q[n1][n2];
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        char x;
+        cin >> x;
+        if(x=='0'){
+            q[0][0]='X';
+            q[0][1]='X';
+            q[0][2]='X';
+            q[0][3]='.';
+            q[1][0]='X';
+            q[1][1]='.';
+            q[1][2]='X';
+            q[2][0]='X';
+            q[2][1]='.';
+            q[2][2]='X';
+            q[3][0]='X';
+            q[3][1]='.';
+            q[3][2]='X';
+            q[4][0]='X';
+            q[4][1]='X';
+            q[4][2]='X';
+        }else if(x=='1'){
+            q[0][0]='.';
+            q[0][1]='.';
+            q[0][2]='X';
+            q[1][0]='.';
+            q[1][1]='.';
+            q[1][2]='X';
+            q[2][0]='.';
+            q[2][1]='.';
+            q[2][2]='X';
+            q[3][0]='.';
+            q[3][1]='.';
+            q[3][2]='X';
+            q[4][0]='.';
+            q[4][1]='.';
+            q[4][2]='X';
+        }else if(x=='2'){
+            q[0][0]='X';
+            q[0][1]='X';
+            q[0][2]='X';
+            q[1][0]='.';
+            q[1][1]='.';
+            q[1][2]='X';
+            q[2][0]='X';
+            q[2][1]='x';
+            q[2][2]='X';
+            q[3][0]='x';
+            q[3][1]='.';
+            q[3][2]='.';
+            q[4][0]='X';
+            q[4][1]='X';
+            q[4][2]='X';
+        }else if(x=='3'){
+            q[0][0]='X';
+            q[0][1]='X';
+            q[0][2]='X';
+            q[1][0]='.';
+            q[1][1]='.';
+            q[1][2]='X';
+            q[2][0]='X';
+            q[2][1]='x';
+            q[2][2]='X';
+            q[3][0]='.';
+            q[3][1]='.';
+            q[3][2]='X';
+            q[4][0]='X';
+            q[4][1]='X';
+            q[4][2]='X';
+        }else if(x=='4'){
+            q[0][0]='X';
+            q[0][1]='X';
+            q[0][2]='X';
+            q[1][0]='X';
+            q[1][1]='.';
+            q[1][2]='X';
+            q[2][0]='X';
+            q[2][1]='.';
+            q[2][2]='X';
+            q[3][0]='X';
+            q[3][1]='.';
+            q[3][2]='X';
+            q[4][0]='X';
+            q[4][1]='X';
+            q[4][2]='X';
+        }
+    }
+    for(int i=0;i<5;i++){
+        for(int j=0;j<3*n;j++){
+            printf("%c",q[i][j]);
+        }
+        printf("\n");
     }
     return 0;
 }
