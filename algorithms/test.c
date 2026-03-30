@@ -100,7 +100,7 @@ int main(){
 }*/
 
 //逻辑判断是否为闰年
-#include <stdio.h>
+/*#include <stdio.h>
 
 int main(){
     int n;
@@ -110,5 +110,83 @@ int main(){
     }else{
         printf("不是闰年\n");
     }
+    return 0;
+}*/
+
+//韩信点兵
+/*#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int x;
+    //枚举
+    for(x=1;x<3000;x++){
+        if(x%5==1 && x%6==5 && x%7==4 && x%11==10){
+            printf("x1=%8d\n",x);
+        }
+    }
+
+   //break妙用
+   for(x=1;x<3000;x++){
+        if(x%5==1 && x%6==5 && x%7==4 && x%11==10){
+            printf("x2=%8d\n",x);
+            break;
+        }
+    }
+
+   //#include <stdlib.h>里面的exit(0);语句
+   for(x=1; ;x++)
+   {
+        if(x%5==1 && x%6==5 && x%7==4 && x%11==10){
+            printf("x3=%8d\n",x);
+            exit(0);
+        }
+    }
+
+    //计数数值
+    int find=0;
+    for(x=1;find!=0;x++)
+    {
+        if(x%5==1 && x%6==5 && x%7==4 && x%11==10){
+            printf("x4=%8d\n",x);
+            find=1;
+        }
+    }
+
+    //bool条件赋值
+    int a=0;
+    do
+    {
+        x++;
+        a=(x%5==1 && x%6==5 && x%7==4 && x%11==10);
+        printf("x5=%8d\n",x);
+    } while (!a);
+
+    //do...while...
+    do{
+        x++;
+        printf("x6=%8d\n",x);
+    }while(!x%5==1 && x%6==5 && x%7==4 && x%11==10);
+
+    //return 0大法
+    for(int i=1; ;i++)
+    {
+        if(i%5==1 && i%6==5 && i%7==4 && i%11==10){
+            printf("x7=%8d\n",i);
+            return 0;
+        }
+    }
+    return 0;
+}*/
+
+#include <stdio.h>
+
+int main(){
+    int n;
+    for(n=100;n<=300;n++){
+        if(n%3==0) continue;
+        printf("%d ",n);
+    }
+    //printf("\n");
     return 0;
 }
