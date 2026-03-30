@@ -144,8 +144,8 @@ int main(){
     return 0;
 }*/
 
-//数字显示屏
-#include <iostream>
+//数字显示屏   //一起判断然后输出很奇怪//真的很奇怪
+/*#include <iostream>
 using namespace std;
 
 const int n1=350,n2=6;
@@ -247,4 +247,32 @@ int main(){
         printf("\n");
     }
     return 0;
+}*/
+
+//由于每个数字对应的点阵是固定的，因此本题可以使用贪心 + 暴力解决。只需将 0∼9 中的所有整数的点阵存入数组，需要时再调用即可。
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+string s;
+string ans[10][5]={"XXX","X.X","X.X","X.X","XXX",
+				  	 "..X","..X","..X","..X","..X",
+				 	 "XXX","..X","XXX","X..","XXX",
+				   	 "XXX","..X","XXX","..X","XXX",
+				   	 "X.X","X.X","XXX","..X","..X",
+				   	 "XXX","X..","XXX","..X","XXX",
+				  	 "XXX","X..","XXX","X.X","XXX",
+				   	 "XXX","..X","..X","..X","..X",
+				  	 "XXX","X.X","XXX","X.X","XXX",
+				  	 "XXX","X.X","XXX","..X","XXX"};
+//ans数组存0~9中整数相对应的点阵。
+int main(){
+	cin>>n>>s;
+	for(int i=0;i<5;i++){//5行。
+		for(int j=0;j<n;j++){//n列。
+			cout<<ans[s[j]-'0'][i];//输出对应点阵。
+			if(j!=n-1)cout<<".";//输出间隔符。
+		}
+		cout<<"\n";//换行。
+	}
+	return 0;//好习惯。
 }
