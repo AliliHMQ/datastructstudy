@@ -23,27 +23,3 @@ int main(){
     }
     return 0;
 }*/
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main(){
-    int n;
-    cin >> n;
-    vector <int> a;
-    for(int i=0;i<n;i++){
-        int m;
-        cin >> m;
-        a.push_back(m);
-    }
-    int x,m;
-    cin >> x >> m;
-    a.insert(a.begin()+x-1,m);
-    for(int i=0;i<n+1;i++){
-        if(i>0){
-            cout << " ";
-        }
-        cout << a[i];
-    }
-    return 0;
-}
