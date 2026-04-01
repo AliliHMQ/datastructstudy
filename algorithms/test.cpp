@@ -82,7 +82,7 @@ int main(){
 }*/
 
 //斐波那契数列
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 int fei(int n){    //求第 10 个rabbit数  //从0开始
@@ -104,4 +104,33 @@ int main(){
         printf("%d\n",re);
     }
     return 0;
+}*/
+
+//字符串打印
+#include <iostream>
+using namespace std;
+
+int main(){
+    char x;
+    scanf("%c",&x);
+    if(x=='H'){
+        cout<<"*   *"<<endl;
+        cout<<"*   *"<<endl;
+        cout<<"*****"<<endl;
+        cout<<"*   *"<<endl;
+        cout<<"*   *"<<endl;
+    }else if(x=='P'){
+        cout<<"**** "<<endl;
+        cout<<"*   *"<<endl;
+        cout<<"**** "<<endl;
+        cout<<"*    "<<endl;
+        cout<<"*    "<<endl;
+    }else{
+        cout<<"*   *"<<endl;
+        cout<<"*   *"<<endl;
+        cout<<"*   *"<<endl;
+        cout<<"*   *"<<endl;
+        cout<<" *** "<<endl;
+    }
+    return 0;  
 }
