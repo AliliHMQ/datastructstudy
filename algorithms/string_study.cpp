@@ -58,10 +58,21 @@ int main(){
 
     //主要交互部分
     cout << "Hi!What's your name?\n";
-    cin >> name;
+    cin >> name; //字符数组能够通过 cin 读取整个字符串！
     cout << "Oh,I know!So,"<< name << "! what's your favorit dessert?\n";
     cin >> dessert;
     cout << "Here you are!Now I know your favorit dessert is " << dessert;  //哈哈注意这里的dessert应该是单个单词，不然只能出第一个连续的词
     return 0;
 }
 
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    char a[101]={};
+    while(cin >> a){        //*读取整个字符串
+        cout << a << endl;  
+    }
+    return 0;
+}
