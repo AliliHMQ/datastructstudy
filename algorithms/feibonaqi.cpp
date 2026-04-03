@@ -25,7 +25,7 @@ int main(){
 //组合数的计算利用了费马小定理求逆元，时间复杂度 O(N) 预处理，O(1) 查询。
 
 //斐波那契循环
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 int main(){
@@ -47,5 +47,31 @@ int main(){
 
     }while(b!=magic);
     printf("%d次才对\n");
+    return 0;
+}*/
+
+//再让我写一遍斐波那契罢了
+
+#include <iostream>
+using namespace std;
+
+int fei(int x){
+    int a[41];
+    a[0]=1,a[1]=1;  //第一、二项
+    for(int i=2;i<x;i++){
+        a[i]=a[i-1]+a[i-2];
+    }
+    return a[x-1]; //第x项
+}
+
+int main(){
+    int n;
+    while(cin >> n){
+        if(n<=2){
+            cout << "1" << endl;
+        }else{
+            cout << fei(n) <<endl;
+        }
+    }
     return 0;
 }

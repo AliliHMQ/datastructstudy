@@ -1,5 +1,6 @@
 //冒泡排序
-#include <iostream>
+
+/*#include <iostream>
 using namespace std;
 
 int main(){
@@ -27,4 +28,39 @@ int main(){
     }
 
     return 0;
+}*/
+
+//优化冒泡排序
+#include <iostream>
+using namespace std;
+
+void bubble_sort(int * q,int n){
+    bool flag=true;                 //标记有序的排序
+    while(flag){
+        flag=false;                 //当无序的时候 停止进入循环进行排序
+        for(int i=0;i<n-1;i++){
+            if(q[i]>q[i+1]){
+               flag=true;
+               int t=q[i];
+               q[i]=q[i+1];
+               q[i+1]=t;
+            }
+        }
+    }
+
+}
+
+int main(){
+    const int N=1e5+10;
+    int a[N];
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    bubble_sort(a,n);
+    for(int i=0;i<n;i++){
+        printf("%d ",a[i]);
+    }
+    return  0;
 }
