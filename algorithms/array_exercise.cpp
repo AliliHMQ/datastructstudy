@@ -250,7 +250,7 @@ int main(){
 }*/
 
 //由于每个数字对应的点阵是固定的，因此本题可以使用贪心 + 暴力解决。只需将 0∼9 中的所有整数的点阵存入数组，需要时再调用即可。
-#include<bits/stdc++.h>
+/*#include<bits/stdc++.h>
 using namespace std;
 int n;
 string s;
@@ -275,4 +275,65 @@ int main(){
 		cout<<"\n";//换行。
 	}
 	return 0;//好习惯。
+}*/
+
+
+//求n个数的数组里面连续m个子数组最小值(数据不大(n<=3*1e3))
+//竟然一遍过?!
+//太神奇了，可歌可泣
+//还是洛谷刷题顺啊
+
+/*#include <iostream>
+using namespace std;
+
+int main(){
+    int n=0,m=0;  //第一行输入
+    scanf("%d %d",&n,&m);
+    //我准备定义一份数组，一个动态计算值，一个最小容器 //1. 滑动窗口思想，O(n) 时间，O(1) 额外空间
+    const int N=1e4;
+    int a[N]={0};
+    int sum=0,min=0;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    for(int i=0;i<m;i++){
+        min+=a[i];
+    }
+    sum=min;
+    for(int i=0;i<n;i++){
+        //这里我怕越界，m 的倍数超过 n 就会指到不知道哪里去了，写个判断控制一下
+        if(i+m<n){
+            sum-=a[i];
+            sum+=a[i+m];
+        }
+
+        /*sum-=a[i];
+        sum+=a[i+m];*/
+        /*if(sum<min){
+            min=sum;
+        }
+    }
+    printf("%d",min);
+    return 0;
+}*/
+
+//数组在信息学竞赛中用处极大，希望你能掌握它的用法，在这条路上勇往直前。
+//这里有一题可以使用概率论的
+
+//基础做法
+//a,b,c三个骰子，有A,B,C个面，求三个最大概率是哪个和
+
+//1\暴力枚举
+#include <iostream>
+using namespace std;
+
+int main(){
+    //这里使用了桶排序
+    const int N=100;
+    int sum[N]={};
+    int n1,n2,n3;
+    scanf("%d %d %d",&n1,&n2,&n3);
+    //等会回来再写，先打比赛
+
+    return 0;
 }

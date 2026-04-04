@@ -48,7 +48,7 @@ int main(){
 }*/
 
 //推测甜点喜欢的交互语言沟通
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 int main(){
@@ -75,6 +75,52 @@ int main(){
         cout << a << endl;  
     }
     return 0;
+}*/
+
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    cin.ignore();  // 忽略换行符 
+
+    const int N=1001; 
+    
+    for(int i=0;i<n;i++){
+        char st[N]={};
+        cin.getline(st,1001);
+        int len = sizeof(st);         // 获取字符串长度      //在oj里面就不行，会算 "\0" 个数
+        for(int j=len-1;j>=0;j--){
+            cout << st[j];
+        }
+        cout << endl;
+    }
+    return 0;
 }
 
+#include <iostream>
+#include <cstring>
 
+using namespace std;
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    cin.ignore();  // 忽略换行符 
+
+    const int N=1001; 
+    
+    for(int i=0;i<n;i++){
+        char st[N]={};
+        cin.getline(st,1001);
+        int len = strlen(st);         // 获取字符串长度
+        for(int j=len-1;j>=0;j--){
+            cout << st[j];
+        }
+        cout << endl;
+    }
+    return 0;
+}
