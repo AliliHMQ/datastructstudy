@@ -324,6 +324,7 @@ int main(){
 //a,b,c三个骰子，有A,B,C个面，求三个最大概率是哪个和
 
 //1\暴力枚举
+/*
 #include <iostream>
 using namespace std;
 
@@ -332,8 +333,103 @@ int main(){
     const int N=100;
     int sum[N]={};
     int n1,n2,n3;
-    scanf("%d %d %d",&n1,&n2,&n3);
+    scanf("%d %d %d",&n1,&n2,&n3);  
     //等会回来再写，先打比赛
-
+    //int sum1=0;
+    for(int i=1;i<=n1;i++){
+        for(int j=1;j<=n2;j++){
+            for(int k=1;k<=n3;k++){
+                //sum1=i+j+k;
+                sum[i+j+k]++;
+            }
+        }
+    }
+    int re1=0,re2=0;
+    for(int i=3;i<=n1+n2+n3;i++){
+        if(sum[i]>re1){
+            re1=sum[i]; //最大次数
+            re2=i;      //最终答案
+        }
+    }
+    printf("%d",re2);
     return 0;
 }
+
+//频率估测概率
+//三个独立均匀分布随机变量之和的众数出现在分布的中心区域，具体位置取决于三个面数的相对大小。
+#include <bits/stdc++.h>
+using namespace std;
+int a,b,c;
+int main(){
+    cin>>a>>b>>c;
+    //排序使 a>=b>=c。
+    if(a<b)swap(a,b);
+    if(b<c)swap(b,c);
+    if(a<b)swap(a,b);
+    if(b<=a-c+1){
+        cout<<1+b+c;
+    }else{
+        cout<<2+a+(b-a+c-1)/2;
+    }
+    return 0;
+}
+
+*/
+
+//开灯问题
+//1、有一点点想法，一维bool数组，但是有一个问题在于多大呢？数据很大 long long 大的灯条！
+//找了一下，这么大：
+//int b[3000005]={};//0表示关，1表示开
+/*
+#include <iostream>
+using namespace std;
+
+int b[3000005]={};//0表示关，1表示开
+
+int main(){
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++){
+        double a;
+        int t;
+        cin >> a >> t;
+        for(int j=1;j<=t;j++){
+            if(b[int(a*(j*1.0))]==0){
+                b[int(a*(j*1.0))]=1;
+            }else{
+                b[int(a*(j*1.0))]=0;
+            }
+        }
+    }
+    for(int i=1;;i++){
+        if(b[i]==1){         //唯一亮灯就输出
+            printf("%d",i);
+            return 0;
+        }
+    }
+    return 0;
+}
+//这里可以利用异或运算的特性：
+
+//任何数与 0 异或结果是它本身。
+//任何数与自身异或结果是 0。
+
+//第二种做法
+#include<bits/stdc++.h>
+using namespace std;
+long long n,t,ans,x;
+double a;
+int main(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+    	cin>>a>>t;
+        for(int i=1;i<=t;i++){
+			x=(int)floor(a*i);//a*i为当前灯的编号
+			ans^=x;
+		}
+	}
+	cout<<ans;
+	return 0;
+}
+
+*/
