@@ -9,12 +9,15 @@ int main(){
 }
 */
 
+
 //1、A. The 67th Integer Problem
 //integer y such that the value of min(x,y)∗ is maximized. 这个地方很迷
 //在之后WA了，因为！Y超出范围了  题目要求：整数y(−67≤y≤67） 使得min（x，y)是最大化的。
 
 /*#include <iostream>
 using namespace std;
+
+
 
 int main(){
    int n;
@@ -27,7 +30,7 @@ int main(){
    }
    return 0;
 }*/
-
+//在这里小小修改一下？
 
 //2、B. The 67th 6-7 Integer Problem
 //这个很简单啊，数里面找最大，当然最后算和的时候用数学方法简直是绝妙
