@@ -179,7 +179,7 @@ int main(){
     return 0;
 }*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 
 int main(){
     int n;
@@ -189,4 +189,104 @@ int main(){
     }
     //printf("\n");
     return 0;
+}*/
+
+/*
+#include<stdio.h>
+int main(void)
+{
+    
+    const int N=1e4;
+    int q[N];
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&q[i]);
+    }
+    int m;
+    scanf("%d",&m);
+    int re=0;
+    for(int i=0;i<n;i++){
+        if(q[i]==m){
+           re++;
+        }
+    }
+    printf("%d",re);
+    
+    return 0;
 }
+
+//这个数组需要注意，非常神奇
+#include<stdio.h>
+int main(void)
+{
+    
+    int n1,n2;
+    int q[11][11]={};
+    scanf("%d %d",&n1,&n2)
+    for(int i=0;i<n1;i++){
+        for(int j=0;j<n2;j++){
+            scanf("%d",&q[i][j]);
+        }
+    }
+    int max[11]; //每行最大的数
+    int a[11];   //每行最大数对应的列坐标
+    for(int i=0;i<n1;i++){
+        max[i]=q[i][0];
+        a[i]=0;
+        for(int j=0;j<n2;j++){
+            if(q[i][j]>max[i]){
+                max[i]=q[i][j];
+                a[i]=j;
+            }
+        }
+    }
+    int found=0;   // 是否找到鞍点
+    for(int i=0;i<n1;i++){
+        int col=a[i];          // 最大值所在的列
+        int col_min=1;      // 假设是列最小
+        for(int k=0;k<n1;k++){
+            if(q[k][col]<max[i]){   // 如果有比它小的，则不是列最小
+                col_min=0;
+                break;
+            }
+        }
+        if(col_min){
+            printf("Array[%d][%d]=%d",i,col,max[i]);
+            found=1;
+            break;   // 题目保证最多一个鞍点
+        }
+    }
+    if(!found){
+        printf("None");
+    }
+    
+    return 0;
+}
+
+//杨辉三角
+#include<stdio.h>
+int main(void)
+{
+    
+    int q[10][10]={};
+    q[0][0]=1;
+    for(int i=1;i<10;i++){
+        q[i][0]=1;
+        q[i][i]=1;
+        for(int j=1;j<i;j++){
+             q[i][j]=q[i-1][j-1]+q[i-1][j];
+        }
+    }
+    for(int i=0;i<10;i++){
+        for(int j=0;j<=i;j++){
+            printf("%d ",q[i][j]);
+        }
+        printf("\n");
+    }
+
+    
+    return 0;
+}
+
+*/

@@ -434,3 +434,15 @@ int main(){
 
 */
 
+//蛇形方阵
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    const int N=10;
+    int q[N][N]={}; //建立一个大数组
+
+    return 0;
+}
