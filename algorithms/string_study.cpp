@@ -77,6 +77,7 @@ int main(){
     return 0;
 }*/
 
+/*
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -121,6 +122,42 @@ int main(){
             cout << st[j];
         }
         cout << endl;
+    }
+    return 0;
+}
+
+*/
+
+//字符串里面的'English'个数
+//std::string 类的 find 方法的调用
+/*
+
+size_t pos = 0;
+while ((pos = s.find(target, pos)) != string::npos) {
+    cnt++;
+    pos += target.length();   // 不重叠：跳过整个子串
+    // 或 pos += 1;          // 允许重叠（通常用于查找模式如 "aa" in "aaa"）
+}
+
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    string target = "English";  //目标字串
+    while (T--) {
+        string s;
+        cin >> s;
+        int cnt = 0;
+        size_t pos = 0;
+        while ((pos = s.find(target, pos)) != string::npos) {
+            cnt++;
+            pos++; // 允许重叠，如果要求不重叠则 pos += target.length()
+        }
+        cout << cnt << endl;
     }
     return 0;
 }
