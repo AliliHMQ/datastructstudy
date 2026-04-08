@@ -290,3 +290,110 @@ int main(void)
 }
 
 */
+
+//2026.4.8恢复
+/*#include <stdio.h>
+
+int main(){
+    //编写一个程序，输入学生人数和每个人的成绩，计算平均成绩。
+    double a,b,c,sum;
+    scanf("%lf %lf %lf",&a,&b,&c);
+    sum=(a+b+c)/3.0;
+    if(sum<=0){
+      printf("the number of students:the scores:average=0.00");
+    }else{
+        printf("the number of students:the scores:average=%.2f",sum);
+    }
+    return 0;
+}
+*/
+
+//有一些事情会让你重新选择，看到你内心真正想要的，无所畏惧地坚持自己
+//或许七八月份你能选择它
+/*#include<stdio.h>
+	int main(void)
+	{  
+	  
+	  int re=1;
+      int n;
+      scanf("%d",&n);
+      while(n>0){
+          int x;
+          x=n%10;
+          re*=x;
+          n/=10;
+      }
+      printf("%d",re);
+	  
+       return 0;
+}
+*/
+
+//S=1!+2!+...+n!
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  int n;
+      scanf("%d",&n);
+      int sum=0;
+      if(n>0){
+          for(int i=1;i<=n;i++){
+              int x=1;
+              for(int j=1;j<=i;j++){
+                  x*=j;
+              }
+              sum+=x;
+          }
+      }else if(n==0){
+          sum=1;
+      }else{
+          sum=0;
+      }
+	  printf("%d",sum);
+	  /*********End**********/ 
+       return 0;
+	}
+
+//水仙花数
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+      int n;
+      scanf("%d",&n);
+	  for(int i=100;i<999;i++){
+          int a,b,c;
+          a=i%10;
+          b=((int)(i/10))%10;
+          c=(int)(i/100);
+          if(c*c*c+a*a*a+b*b*b==i){
+             printf("%d ",i);
+          }
+      }
+	  
+	  /*********End**********/ 
+       return 0;
+	}
+//完数
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  int n;
+      scanf("%d",&n);
+      for(int i=2;i<=n;i++){
+          int x=i;
+          int sum=0;
+          for(int j=1;j<x;j++){
+              if(x%j==0){
+                  sum+=j;
+              }
+          }
+          if(sum==x){
+              printf("%d\n",x);
+          }
+      }
+	  /*********End**********/ 
+       return 0;
+	}
