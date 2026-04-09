@@ -397,3 +397,133 @@ int main(){
 	  /*********End**********/ 
        return 0;
 	}
+//分数求和
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  double n,sum=1;
+      for(int i=2;i<101;i++){
+          if(i%2==0){
+              sum+=-1*(1.0/i);
+          }else{
+              sum+=1*(1.0/i);
+          }
+      }
+	  printf("%.3f",sum);
+	  /*********End**********/ 
+       return 0;
+	}
+//小球高度
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  double h,n;
+      scanf("%lf %lf",&h,&n);
+      double sum=h;
+      for(int i=0;i<n;i++){
+          h/=2.0;
+          sum+=h*2;
+      }
+      sum=sum-2*h;
+      printf("%.2f %.2f",h,sum);
+	  /*********End**********/ 
+       return 0;
+}
+
+//求其最大公约数和最小公倍数。
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  int n,m;
+      int re1=1,re2=1;
+      scanf("%d %d",&n,&m);
+      for(int i=1;i<=n*m;i++){
+          if(n%i==0 && m%i==0 && i<=n && i<=m){
+             re1=i;
+          }
+      }
+      re2=re1*(n/re1)*(m/re1);
+      printf("最大公约数是:%d\n",re1);
+	  printf("最小公倍数是:%d\n",re2);
+	  /*********End**********/ 
+       return 0;
+	}
+//字符串统计
+#include<stdio.h>
+#include <ctype.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  int letter = 0, digit = 0, space = 0, other = 0;
+    char ch;
+
+    // 逐字符读取，直到换行符
+    while ((ch = getchar()) != '\n') {
+        if (isalpha(ch)) {
+            letter++;
+        } else if (isdigit(ch)) {
+            digit++;
+        } else if (ch == ' ') {
+            space++;
+        } else {
+            other++;
+        }
+    }
+
+    printf("%d %d %d %d\n", letter, digit, space, other);
+	  
+	  /*********End**********/ 
+       return 0;
+	}
+//s=a+aa+aaa+aaaa+aa...a
+#include<stdio.h>
+	int main(void)
+	{  
+	  /*********Begin*********/
+	  int x,n;
+      int sum=0;
+      scanf("%d %d",&x,&n);
+      int p=1;
+      for(int i=0;i<n-1;i++){
+          p*=10;
+      }
+      for(int i=1;i<=n;i++){
+          sum+=i*p*x;
+          p/=10;
+      }
+	  printf("%d",sum);
+	  /*********End**********/ 
+       return 0;
+	}
+//数组
+#include<stdio.h>
+int main(void)
+{
+    /*********Begin*********/
+    int x,y;
+    int a[11][11]={};
+    scanf("%d,%d",&x,&y);
+    for(int i=0;i<x;i++){
+        for(int j=0;j<y;j++){
+            scanf("%d",&a[i][j]);
+        }
+    }
+    int max=a[0][0];
+    int w=0,b=0;
+    for(int i=0;i<x;i++){
+        for(int j=0;j<y;j++){
+            if(a[i][j]>max){
+                max=a[i][j];
+                w=i;
+                b=j;
+            }
+        }
+    }
+    printf("Input m, n:Input %d*%d array:\n",x,y);
+    printf("max=%d, row=%d, col=%d",max,w+1,b+1);
+    /*********End**********/
+    return 0;
+}

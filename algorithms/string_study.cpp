@@ -140,6 +140,7 @@ while ((pos = s.find(target, pos)) != string::npos) {
 }
 
 */
+/*
 #include <iostream>
 #include <string>
 using namespace std;
@@ -161,3 +162,6 @@ int main() {
     }
     return 0;
 }
+*/
+
+//学习 string 类
