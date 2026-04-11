@@ -328,12 +328,12 @@ int main(){
        return 0;
 }
 */
-
+/*
 //S=1!+2!+...+n!
 #include<stdio.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	  
 	  int n;
       scanf("%d",&n);
       int sum=0;
@@ -351,15 +351,14 @@ int main(){
           sum=0;
       }
 	  printf("%d",sum);
-	  /*********End**********/ 
+	  
        return 0;
 	}
 
 //水仙花数
 #include<stdio.h>
 	int main(void)
-	{  
-	  /*********Begin*********/
+	{ 
       int n;
       scanf("%d",&n);
 	  for(int i=100;i<999;i++){
@@ -372,14 +371,14 @@ int main(){
           }
       }
 	  
-	  /*********End**********/ 
+	    
        return 0;
 	}
 //完数
 #include<stdio.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	        
 	  int n;
       scanf("%d",&n);
       for(int i=2;i<=n;i++){
@@ -394,14 +393,14 @@ int main(){
               printf("%d\n",x);
           }
       }
-	  /*********End**********/ 
+	       
        return 0;
 	}
 //分数求和
 #include<stdio.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	    
 	  double n,sum=1;
       for(int i=2;i<101;i++){
           if(i%2==0){
@@ -411,14 +410,14 @@ int main(){
           }
       }
 	  printf("%.3f",sum);
-	  /*********End**********/ 
+	    
        return 0;
 	}
 //小球高度
 #include<stdio.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	    
 	  double h,n;
       scanf("%lf %lf",&h,&n);
       double sum=h;
@@ -428,7 +427,7 @@ int main(){
       }
       sum=sum-2*h;
       printf("%.2f %.2f",h,sum);
-	  /*********End**********/ 
+	    
        return 0;
 }
 
@@ -436,7 +435,7 @@ int main(){
 #include<stdio.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	    
 	  int n,m;
       int re1=1,re2=1;
       scanf("%d %d",&n,&m);
@@ -448,7 +447,7 @@ int main(){
       re2=re1*(n/re1)*(m/re1);
       printf("最大公约数是:%d\n",re1);
 	  printf("最小公倍数是:%d\n",re2);
-	  /*********End**********/ 
+	    
        return 0;
 	}
 //字符串统计
@@ -456,7 +455,7 @@ int main(){
 #include <ctype.h>
 	int main(void)
 	{  
-	  /*********Begin*********/
+	    
 	  int letter = 0, digit = 0, space = 0, other = 0;
     char ch;
 
@@ -475,14 +474,14 @@ int main(){
 
     printf("%d %d %d %d\n", letter, digit, space, other);
 	  
-	  /*********End**********/ 
+	    
        return 0;
 	}
 //s=a+aa+aaa+aaaa+aa...a
 #include<stdio.h>
 	int main(void)
-	{  
-	  /*********Begin*********/
+        {  
+        
 	  int x,n;
       int sum=0;
       scanf("%d %d",&x,&n);
@@ -495,14 +494,14 @@ int main(){
           p/=10;
       }
 	  printf("%d",sum);
-	  /*********End**********/ 
+	    
        return 0;
 	}
 //数组
 #include<stdio.h>
 int main(void)
 {
-    /*********Begin*********/
+    
     int x,y;
     int a[11][11]={};
     scanf("%d,%d",&x,&y);
@@ -524,6 +523,149 @@ int main(void)
     }
     printf("Input m, n:Input %d*%d array:\n",x,y);
     printf("max=%d, row=%d, col=%d",max,w+1,b+1);
-    /*********End**********/
+    
     return 0;
 }
+*/
+
+//作业练习
+//递归，我又不会了
+/*
+#include <stdio.h>
+
+int f(int n){
+    if(n==0 || n==1){
+        return 1;
+    }else{
+        //return f(n)*f(n-1);//在 else 分支里调用了 f(n) * f(n-1)，其中 f(n) 会再次调用自身且参数 n 没有减小，导致无限递归，最终栈溢出。
+        return n*f(n-1);
+        }
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    int re=f(n);
+    printf("%d",re);
+    return 0;
+}
+*/
+
+//递归找最大的实数
+/*
+#include<stdio.h>
+
+int main(){
+    int n;
+    double a[1001]={};
+    scanf("%d",&n);
+    scanf("%lf",&a[0]);
+    double max=a[0];
+    int m=0;
+    for(int i=1;i<n;i++){      //循环去找，过不了，不知 -(T_T)-?
+        scanf("%lf",&a[i]);
+        if(a[i]>max){
+            max=a[i];
+            m=i;
+        }
+    }
+    printf("%.3f %d",max,m);
+    return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+
+double max_v;
+int max_p;
+
+void search(double a[], int i, int n) {
+    if (i>=n) return;
+    if (a[i]>max_v) {
+        max_v=a[i];
+        max_p=i;
+    }
+    search(a,i+1,n);  //移动到下一个比较
+}
+
+int main() {
+    int n;
+    double a[1001];
+    scanf("%d",&n);
+    for (int i=0;i<n;i++)
+        scanf("%lf",&a[i]);
+    
+    max_v=a[0];
+    max_p=0;
+    search(a,1,n);   //从第一个数开始比较
+    
+    printf("%.3f %d\n", max_v, max_p);
+    return 0;
+}
+*/
+/*
+//两个A之间的字符串
+#include <stdio.h>
+
+int main(){
+    char a[42]={""};
+    char b[42]={""};
+    int re=0;
+    scanf("%s",a);
+    for(int i=0;i<40;i++){
+        if(a[i]=='A'){
+            int x=i;
+            for(int j=x+1;j<41;j++){
+                if(a[j]!='A'){
+                    b[re]=a[j];
+                    re++;
+                }else{
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    printf("%d\n",re);
+    printf("%s",b);
+    return 0;
+}
+
+*/
+
+//函数 strcpy
+#include  <stdio.h>
+#include <string.h>
+
+int main(){
+    char a[101];
+    char s2[101];
+    scanf("%s",a);
+    strcpy(s2,a);
+    printf("%s",s2);
+    return 0;
+}
+
+//计数
+#include <stdio.h>
+
+int main(){
+    char str[101];
+    fgets(str,101,stdin);
+    int l=0,d=0,s=0,o=0;
+    for (int i=0;str[i]!='\0'&&str[i]!='\n';i++) {
+        if( 'A'<=str[i] && str[i]<='z'){ 
+            l++;
+        }else if(48<=str[i] && str[i]<=57){ 
+            d++;
+        }else if(str[i]==' '){     
+            s++;
+        }else{
+            o++;  
+        }                
+    }
+    printf("%d %d %d %d\n",l,d,s,o);
+    return 0;
+}
+

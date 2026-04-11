@@ -434,17 +434,141 @@ int main(){
 
 */
 
-//蛇形方阵
+// P1789 MC插火把   //2026.4.11 
+#include <iostream>
+using namespace std;
+//第一行为两个正整数 n,m 和一个非负整数 k。
+//输入共 m+k+1 行。
 
-//不会做
+int main(){
+    //开数组大小
+    int a[105][105]={};
+    //火把坐标存储
+    int h[27][105][105]={};
+    //萤石
+    int yin[6][105][105]={};
+    int n,m,k;
+    cin >> n >> m >> k;
+    //火把m个
+    //萤石k个
+
+    //输入坐标
+    for(int i=0;i<m;i++){
+        int x,y;
+        scanf("%d %d",&x,&y);
+        h[i][x][y]=1;
+    }
+    for(int j=0;j<k;j++){
+        int x,y;
+        scanf("%d %d",&x,&y);
+        yin[j][x][y]=1;
+    }
+
+    //处理照亮问题
+    //火把
+    for(int i=0;i<m;i++){
+        
+    }
+    return 0;
+}
+
+
+//看一看题解区大佬的miao
+#include <bits/stdc++.h>
+using namespace std;
+bool a[10000][10000]; //地图
+int n, m, k, cnt;
+
+int main() {
+	cin >> n >> m >> k;
+	int cx, cy;
+	for (int i = 3; i <= 2 + m; i++) {
+		cin >> cx >> cy;
+		cx += 2, cy += 2; //偏移量
+		for (int i = cx - 2; i < cx + 3; i++)
+			a[i][cy] = true;
+		for (int i = cy - 2; i < cy + 3; i++)
+			a[cx][i] = true;
+		a[cx + 1][cy + 1] = true, a[cx - 1][cy + 1] = true;
+		a[cx - 1][cy - 1] = true, a[cx + 1][cy - 1] = true; //照亮地图
+	}
+	for (int i = 3; i <= 2 + k; i++) {
+		cin >> cx >> cy;
+		cx += 2, cy += 2;
+		for (int i = cx - 2; i <= cx + 2; i++)
+			for (int j = cy - 2; j <= cy + 2; j++)
+				a[i][j] = true; //萤石范围3*3更好处理
+	}
+	for (int i = 3; i <= 2 + n; i++) //注意初始为3
+		for (int j = 3; j <= n + 2; j++)
+			if (a[i][j] == false) //没有被照亮
+				cnt++;
+	cout << cnt; //未被照亮的点的数量
+	return 0;
+}
+
+//deepseak
 #include <iostream>
 using namespace std;
 
-int main(){
-    int n;
-    scanf("%d",&n);
-    const int N=10;
-    int q[N][N]={}; //建立一个大数组
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    // 标记每个格子是否被照亮（包括火把和萤石本身）
+    bool light[105][105] = {false};
+
+    // 火把的照亮范围相对坐标（13个点）
+    int torch_dx[] = {-2, -1, -1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 2};
+    int torch_dy[] = {0, -1, 0, 1, -2, -1, 0, 1, 2, -1, 0, 1, 0};
+
+    // 萤石的照亮范围相对坐标（5x5共25个点）
+    int glow_dx[25], glow_dy[25];
+    int idx = 0;
+    for (int dx = -2; dx <= 2; dx++) {
+        for (int dy = -2; dy <= 2; dy++) {
+            glow_dx[idx] = dx;
+            glow_dy[idx] = dy;
+            idx++;
+        }
+    }
+
+    // 处理火把
+    for (int i = 0; i < m; i++) {
+        int x, y;
+        cin >> x >> y;
+        for (int d = 0; d < 13; d++) {
+            int nx = x + torch_dx[d];
+            int ny = y + torch_dy[d];
+            if (nx >= 1 && nx <= n && ny >= 1 && ny <= n) {
+                light[nx][ny] = true;
+            }
+        }
+    }
+
+    // 处理萤石
+    for (int i = 0; i < k; i++) {
+        int x, y;
+        cin >> x >> y;
+        for (int d = 0; d < 25; d++) {
+            int nx = x + glow_dx[d];
+            int ny = y + glow_dy[d];
+            if (nx >= 1 && nx <= n && ny >= 1 && ny <= n) {
+                light[nx][ny] = true;
+            }
+        }
+    }
+
+    // 统计未被照亮的格子数
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (!light[i][j]) {
+                ans++;
+            }
+        }
+    }
+    cout << ans << endl;
 
     return 0;
 }

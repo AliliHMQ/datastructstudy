@@ -1,3 +1,4 @@
+//压缩技术 数据->图片
 #include <iostream>
 using namespace std;
 
@@ -24,5 +25,34 @@ int main(){
         }
         printf("\n");
     }
+    return 0;
+}
+
+//图片->数据
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int n,x,num=0,t=1;
+string a,b;
+
+int main(){
+    cin >> b;
+    n=b.size();
+    cout<< n << " ";
+    while(cin >> a){
+        b+=a;
+    }
+    if(b[0]!='0') cout << "0 ";//开始时0的个数//格式问题
+    for(int i=1;i<n*n;i++){
+        if(b[i]==b[i-1]){
+            t++;
+        }else{
+        cout << t <<" ";
+        t=1;
+        }
+    }
+    cout<<t;  //最后一次b[i]=b[i-1]部分计数
     return 0;
 }
