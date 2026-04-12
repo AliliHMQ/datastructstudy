@@ -26,5 +26,13 @@ int main(){
     }
     int re=binary_search(a,0,n-1,x);
     printf("%d",re);
+    return 0;   
+}
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    
     return 0;
 }
