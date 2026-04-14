@@ -669,3 +669,35 @@ int main(){
     return 0;
 }
 
+//
+#include <stdio.h>
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    int a[101][101];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            scanf("%d",&a[i][j]);
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            for(int j=i+1;j<=n;j++)
+            {
+            a[j][i]+=a[i][j];
+            a[i][j]=0;
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            printf("%d",a[i][j]);
+            if(j<n-1){
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    return 0;
+}

@@ -117,3 +117,52 @@ int main(){
     }
     return 0;
 }
+
+//在两个 "A" 之间输出字符串
+#include <iostream>
+using namespace std;
+
+int main(){
+    char s[100];
+    int p1=-1,p2=-1;       //两个 "A" 的位置
+    scanf("%s",s);
+    for(int i=0;s[i];i++)
+	{
+        if(s[i]=='A')
+		{
+            p1==-1?(p1=i):(p2=i);  //这个判断很好，不用循环两遍
+        }
+    }
+    printf("%d\n",p2-p1-1);
+    for(int i=p1+1;i<p2;i++)
+	{
+        printf("%c",s[i]);
+    }
+    return 0;
+}
+ 
+//p1957 口算练习题
+/*
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+
+int main(){
+    char a;
+    int 
+    return 0;
+}
+*/
+
+//p5015 标题统计
+//cin 在输入一个 char 时会跳过空格和换行符  //天才吧
+#include <iostream>
+using namespace std;
+
+int main(){
+    int s=0;char c;
+    while(cin >> c) s++;
+    cout << s;
+    return 0;
+}
