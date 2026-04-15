@@ -156,7 +156,7 @@ int main(){
 */
 
 //p5015 标题统计
-//cin 在输入一个 char 时会跳过空格和换行符  //天才吧
+//cin 在输入一个 char 时会跳过   空格和换行符!!!  //天才吧
 #include <iostream>
 using namespace std;
 
@@ -164,5 +164,29 @@ int main(){
     int s=0;char c;
     while(cin >> c) s++;
     cout << s;
+    return 0;
+}
+
+//这个故事又告诉我们什么道理呢
+//看到函数的功能特性哦，很有用的miao
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++){
+        char a[10001];
+        cin >> a;
+        int re=0;
+        for(int i=0;i<strlen(a);i++){
+            if('a'<=a[i] && a[i]<='z'){
+                re++;
+            }
+        }
+        printf("%d\n",re);
+    }
     return 0;
 }

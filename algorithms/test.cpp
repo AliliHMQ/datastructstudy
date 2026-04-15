@@ -134,3 +134,25 @@ int main(){
     }
     return 0;  
 }
+
+//数组水题
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    while(n--){
+        int m;
+        cin >> m;
+        int n[1001];
+        int re=0;
+        for(int i=0;i<m;i++){
+            int x;
+            cin >> x;
+            re+=x;
+        }
+        printf("%d\n",re);
+    }
+    return 0;
+}
