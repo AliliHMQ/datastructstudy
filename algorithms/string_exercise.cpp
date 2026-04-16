@@ -190,3 +190,48 @@ int main(){
     }
     return 0;
 }
+
+//p5734 文字处理软件
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    //操作次数
+    int n;
+    cin >> n;
+    string str;   //字符串本质
+    string str2;
+    cin >> str;
+    while(n--){
+        int x;
+        cin >> x;
+        if(x==1){
+            cin >> str2;
+            str+=str2;
+            cout << str2 <<endl;
+        }else if(x==2){
+            int a,b;
+            cin >> a >> b;
+            for(int i=a;i<=b;i++){
+                cout << str[i];
+            }
+            printf("\n");
+        }else if(x==3){
+                int w;
+                cin >> w;
+                string m[101];
+                for(int i=0;i<w;i++){
+                    m[i]=str2[i];
+                }
+                string tmp[101];
+                m+=tmp;
+                int a=sizeof(tmp);
+                int len=sizeof(str2);
+                for(int i=w+a;i<a+len;i++){
+                    m[i]=str2[i];
+                }
+            }
+    }
+    return 0;
+}
