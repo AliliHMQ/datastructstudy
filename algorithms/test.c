@@ -701,3 +701,88 @@ int main(){
     }
     return 0;
 }
+
+
+//公约数与公倍数
+#include<stdio.h>
+//编写最大公约数GCD函数
+/*********Begin*********/
+int gcd(int x,int y){
+    int min=x;
+    if(y<x){
+        min=y;
+    }
+    int re=1;
+    for(int i=2;i<min;i++){
+        if(x%i==0 && y%i==0){
+            re=i;
+        }
+    }
+    return re;
+}
+/*********End**********/ 
+
+//编写最小公倍数LCM函数
+/*********Begin*********/
+int lcm(int x,int y){
+    /*int max=x;
+    if(y>x){
+        max=y;
+    }
+    int re=1;
+    for(int i=2;i<max;i++){
+        if(x%i==0 && y%i==0){
+            re=i;
+        }
+    }*/
+    int re=gcd(x,y);
+    return x/re*y;
+}
+/*********End**********/ 
+int main(void)
+{  
+    /*********Begin*********/
+    int x,y;
+    scanf("%d %d",&x,&y);
+    int re1=gcd(x,y);
+    int re2=lcm(x,y);
+    printf("%d %d",re1,re2);
+    /*********End**********/ 
+    return 0;
+}
+
+
+//优化
+#include<stdio.h>
+
+//编写最大公约数GCD函数
+/*********Begin*********/
+int gcd(int x, int y) {
+    // 辗转相除法
+    while (y != 0) {
+        int temp = x % y;
+        x = y;
+        y = temp;
+    }
+    return x;
+}
+/*********End**********/ 
+
+//编写最小公倍数LCM函数
+/*********Begin*********/
+int lcm(int x, int y) {
+    return x / gcd(x, y) * y;  // 先除后乘防止溢出
+}
+/*********End**********/ 
+
+int main(void)
+{  
+    /*********Begin*********/
+    int x, y;
+    scanf("%d %d", &x, &y);
+    int re1 = gcd(x, y);
+    int re2 = lcm(x, y);
+    printf("%d %d", re1, re2);
+    /*********End**********/ 
+    return 0;
+}
