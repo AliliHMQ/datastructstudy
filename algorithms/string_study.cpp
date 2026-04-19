@@ -168,3 +168,6 @@ int main() {
 
 
 //练习，添加逗号
+//Thank you give me some times to have a break.
+//Thank you! 
+//I love you little thing.
