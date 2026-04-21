@@ -234,3 +234,26 @@ int main(){
     }
     return 0;
 }
+
+//P1308 [NOIP 2011 普及组] 统计单词数
+//分别是单词在文章中出现的次数
+//和第一次出现的位置
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+const int N=1e6+10;
+
+int main(){
+    char a[11];
+    cin.getline(a,11);
+
+    cin.get();
+
+    char m[N];
+    cin.getline(m,N);
+
+    
+    return 0;
+}
