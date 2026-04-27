@@ -635,7 +635,8 @@ int main(){
 */
 
 //函数 strcpy
-#include  <stdio.h>
+
+/*#include  <stdio.h>
 #include <string.h>
 
 int main(){
@@ -702,11 +703,12 @@ int main(){
     return 0;
 }
 
+*/
 
 //公约数与公倍数
-#include<stdio.h>
+/*#include<stdio.h>
 //编写最大公约数GCD函数
-/*********Begin*********/
+
 int gcd(int x,int y){
     int min=x;
     if(y<x){
@@ -720,10 +722,10 @@ int gcd(int x,int y){
     }
     return re;
 }
-/*********End**********/ 
+
 
 //编写最小公倍数LCM函数
-/*********Begin*********/
+
 int lcm(int x,int y){
     /*int max=x;
     if(y>x){
@@ -735,19 +737,19 @@ int lcm(int x,int y){
             re=i;
         }
     }*/
-    int re=gcd(x,y);
+   /* int re=gcd(x,y);
     return x/re*y;
 }
-/*********End**********/ 
+
 int main(void)
 {  
-    /*********Begin*********/
+   
     int x,y;
     scanf("%d %d",&x,&y);
     int re1=gcd(x,y);
     int re2=lcm(x,y);
     printf("%d %d",re1,re2);
-    /*********End**********/ 
+    
     return 0;
 }
 
@@ -756,7 +758,7 @@ int main(void)
 #include<stdio.h>
 
 //编写最大公约数GCD函数
-/*********Begin*********/
+
 int gcd(int x, int y) {
     // 辗转相除法
     while (y != 0) {
@@ -766,23 +768,51 @@ int gcd(int x, int y) {
     }
     return x;
 }
-/*********End**********/ 
+
 
 //编写最小公倍数LCM函数
-/*********Begin*********/
+
 int lcm(int x, int y) {
     return x / gcd(x, y) * y;  // 先除后乘防止溢出
 }
-/*********End**********/ 
+ 
 
 int main(void)
 {  
-    /*********Begin*********/
+    
     int x, y;
     scanf("%d %d", &x, &y);
     int re1 = gcd(x, y);
     int re2 = lcm(x, y);
     printf("%d %d", re1, re2);
-    /*********End**********/ 
+   
+    return 0;
+}
+*/
+
+
+//例题 p247 8.11  指针与二维数组
+
+#include <stdio.h>
+int main(){
+    //自己写一个数组
+    int a[3][4]={1,2,3,4,5,6,7,8,9,10,11,12};  //初始化3*4=12个数
+    //输出方式 含分界线
+    printf("-----------------\n");
+    printf("%d,%d\n",*a,a);           //首元地址
+    printf("%d,%d\n",a[0],*(a+0));    //0行0列元素地址
+    printf("%d,%d\n",&a[0],&a[0][0]);
+    printf("-----------------\n");
+    printf("%d,%d\n",a[1],a+1);       //1行0列元素地址 1行起始地址
+    printf("%d,%d\n",&a[1][0],*(a+1)+0); //1行0列元素地址
+    printf("-----------------\n");
+    printf("%d,%d\n",a[2],*(a+2));    //2行0列元素地址
+    printf("%d,%d\n",&a[2],a+2);
+    printf("以上每行首元地址逐个增加16 (int是4字节，每行4个int类型数字；4*4=16)\n");
+    //元素值
+    printf("-----------------\n");
+    printf("%d,%d\n",a[1][0],*(*(a+1)+0));
+    printf("%d,%d\n",*a[2],*(*(a+2)+0));
+    printf("%d,%d\n",*(a[2]+1),*(*(a+2)+1));
     return 0;
 }

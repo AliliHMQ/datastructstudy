@@ -104,6 +104,7 @@ int main(){
     c[i]<0 则c[i]=a[i]-b[i]-t+10; t=1;
 */
 
+//都是正整数情况
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -192,8 +193,8 @@ int main(){
 }
 
 
-//上面的似乎拥有问题
-/*
+//上面的似乎拥有问题 你的减法函数实际执行了 4523128104 - 6352309719，即较小的数减较大的数，并且结果没有处理负号，而是直接输出了正数的补码形式。
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -237,10 +238,201 @@ int main(){
     return 0;
 }
 
-作者：洛喑
-链接：https://www.acwing.com/solution/content/126786/
-来源：AcWing
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+//写过了
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int N=1e6+10;
+
+//判断是否有 A>=B  B小就输出0
+bool cmp(vector<int> &A,vector<int> &B){
+    //位数不相同
+    if(A.size()!=B.size()) return A.size()>B.size();
+
+    else{
+        for(int i=A.size()-1;i>=0;i--){
+            if(A[i]!=B[i]){
+                return A[i]>=B[i];
+            }
+            //return true;
+        }
+        return true;
+    }
+}
+
+
+vector<int>sub(vector<int> &A,vector<int> &B){
+    vector<int> C;
+    int t=0;
+    for(int i=0;i<A.size();i++){
+        t=A[i]-t;
+        if(i<B.size()) t-=B[i];
+        
+        C.push_back((t+10)%10);
+        if(t>=0) t=0;
+        else t=1;
+    }
+    //返回时去掉前导0 例如123-120=003(C的位数和A设置的一样)变成3 这样用 while
+    while(C.size()>1 && C.back()==0) C.pop_back(); //删掉后面的0
+    return C;
+}
+
+int main(){
+    string a,b;
+    cin >> a >> b;
+    vector<int> A,B;
+    for(int i=a.size()-1;i>=0;i--) A.push_back(a[i]-'0');
+    for(int i=b.size()-1;i>=0;i--) B.push_back(b[i]-'0');
+    
+    if(cmp(A,B)){
+        auto C=sub(A,B);
+        for(int i=C.size()-1;i>=0;i--) cout << C[i];
+    }else{
+        auto C=sub(B,A);
+        cout <<"-";
+        for(int i=C.size()-1;i>=0;i--) cout << C[i];
+    }
+    return 0;
+}
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int N=1e6+10;
+
+bool cmp(vector<int> &A,vector<int> &B){
+    if(A.size()!=B.size()) return A.size()>B.size();
+    else{
+        for(int i=A.size()-1;i>=0;i--){
+            if(A[i]!=B[i]) {
+                return A[i]>=B[i];
+        }
+        return true;
+    }
+ }
+}
+
+vector<int> sub(vector<int> &A,vector<int> &B){
+    vector<int> C;
+    int t=0;
+    for(int i=0;i<A.size();i++){
+        t=A[i]-t;
+        if(i<B.size()) t-=B[i];
+        C.push_back((t+10)%10);
+        if(t<0){
+            t=1;
+        }else{
+            t=0;
+        }
+    }
+    while(C.size()>1 && C.back()==0) C.pop_back();  //挑战在这里需要加上 back() 失败
+    return C;
+}
+
+int main(){
+    string a,b;
+    cin >> a >> b;
+    vector<int> A,B;
+    for(int i=a.size()-1;i>=0;i--) A.push_back(a[i]-'0');
+    for(int i=b.size()-1;i>=0;i--) B.push_back(b[i]-'0');
+    
+    if(cmp(A,B)){
+        auto C=sub(A,B);
+        for(int i=C.size()-1;i>=0;i--) cout << C[i];
+    }else{
+        auto C=sub(B,A);
+        cout << "-";
+        for(int i=C.size()-1;i>=0;i--) cout<< C[i];
+    }
+    
+    return 0;
+}
+
+
+//高精度乘法
+
+/*
+    a[3]a[2]a[1]a[0]
+                  b
+    t[3]t[2]t[1]t[0] //进位  b作为整体去乘
+                c[0]
+
 */
 
-//乘法都话也是一样的
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> mul(vector<int> &A, int b){
+    vector<int> C;
+    int t=0;
+    for(int i=0;i<A.size() || t;i++){
+        if(i<A.size()) t+=A[i]*b;
+        C.push_back(t%10);
+        t/=10;  //类似于加法
+    }
+    return C;
+}
+
+int main(){
+    string a;
+    cin >> a;
+    int b;
+    cin >> b;
+
+    vector<int> A;
+    for(int i=a.size()-1;i>=0;i--) A.push_back(a[i]-'0');
+    
+    auto C=mul(A,b);
+    for(int i=C.size()-1;i>=0;i--) cout<< C[i];
+    return 0;
+}
+
+//除法
+//处理余数部分和商部分
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// A/b,商是 c 余数是r
+vector<int> div(vector<int> &A,int b,int &r){
+    vector<int> C;
+    //余数一开始是零
+    r=0;
+    for(int i=A.size()-1;i>=0;i--){
+        r=r*10+A[i];
+        C.push_back(r/b);
+        r%=b;
+    }
+    //反过来
+    reverse(C.begin(),C.end());
+    //去掉前导0
+    while(C.size()>1 && C.back()==0) C.pop_back();
+    return C;
+
+}
+
+int main(){
+    string a;
+    cin >> a;
+    int b;
+    cin >> b;
+
+    vector<int> A;
+    for(int i=a.size()-1;i>=0;i--) A.push_back(a[i]-'0');
+    
+    int r;
+    auto C=div(A,b,r);
+    for(int i=C.size()-1;i>=0;i--) cout<< C[i];
+    cout << endl << r << endl;
+    return 0;
+}
+
+//I just come to here and get some imformation.
