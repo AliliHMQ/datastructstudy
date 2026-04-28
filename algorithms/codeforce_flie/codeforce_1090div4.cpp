@@ -70,7 +70,7 @@ int main(){
 //当然是需要用到构造啦
 //但是我发现构造还是需要有 数学原理 根据每一组三个数的大小规律去求简直是太棒啦!
 
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 
 int main(){
@@ -92,7 +92,7 @@ int main(){
     printf("\n");
    }
    return 0;
-}*/
+}
 
 //4\构造数组让所有的相邻两个数的最大公约数不同
 //构造，让gcd=1,2,3,4,5,6

@@ -572,3 +572,42 @@ int main() {
 
     return 0;
 }
+
+//P5731 【深基5.习6】蛇形方阵
+#include <iostream>
+using namespace std;
+
+const int N=11;
+
+int main(){
+    int n;
+    cin>>n;
+    int a[N][N]={};
+    int lt=0,rt=n-1,tp=0,bt=n-1;
+    //边界条件
+    int sum=0;
+    //这个边界条件我很困惑
+    while(lt<=rt && tp<=bt){
+        for(int i=lt;i<=rt;i++) a[tp][i]=++sum; //从左到右填顶部
+        tp++;
+        for(int i=tp;i<=bt;i++) a[i][rt]=++sum; //从上到下填右侧
+        rt--;
+        if(tp<=bt){
+            for(int i=rt;i>=lt;i--) a[bt][i]=++sum; //从右到左填底部
+            bt--;
+        }
+        //bt--;
+        if(rt>=lt){
+            for(int i=bt;i>=tp;i--) a[i][lt]=++sum; //从下到上填左侧
+            lt++;
+        }
+        //lt++;
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            printf("%3d",a[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
