@@ -792,7 +792,7 @@ int main(void)
 
 
 //例题 p247 8.11  指针与二维数组
-
+/*
 #include <stdio.h>
 int main(){
     //自己写一个数组
@@ -814,5 +814,113 @@ int main(){
     printf("%d,%d\n",a[1][0],*(*(a+1)+0));
     printf("%d,%d\n",*a[2],*(*(a+2)+0));
     printf("%d,%d\n",*(a[2]+1),*(*(a+2)+1));
+    return 0;
+}*/
+
+//循环实验
+/*
+//项目1 找出最小值
+#include <stdio.h>
+
+const int N=1e5+10;  //随便取一个数据范围
+
+int main(){
+    //输入一个正整数 n, 再输入 n 个整数
+    //使用数组
+    int n;
+    scanf("%d",&n);
+    int a[N]={};
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    int min=a[0];
+    for(int i=0;i<n;i++){
+        if(min>a[i]){
+            min=a[i];
+        }
+    }
+    printf("最小数为：%d",min);
+    return 0;
+}
+*/
+
+//项目2 黑洞数问题
+//任何一个数字不全相同的三位数
+//经有限次 “重排求差”操作
+//（即组成该数的数字重排后的最大数减去重排后的最小数）
+//总会得到 495 。
+//最后所得的 495 即为三位黑洞数，四位黑洞数为6174。
+
+//验证
+//生成全部的不同的三位数 验证是否都会回到495
+
+#include <stdio.h>
+
+
+int *a(int n){
+    static int x[3]; //静态全局区存储 安全可靠 如果换成int的话，就会在return时候变成悬空指针很危险
+    x[0]=n/100; //百位
+    x[1]=(n/10)%10; //十位
+    x[2]=n%10; //个位
+    return x;
+}
+
+int fmin(int *x){
+    int min=x[0];
+    for(int i=0;i<3;i++){
+        if(min>x[i]){
+            min=x[i];
+        }
+    }
+    return min;
+}
+
+int fmax(int *x){
+    int max=x[0];
+    for(int i=0;i<3;i++){
+        if(max<x[i]){
+            max=x[i];
+        }
+    }
+    return max;
+}
+
+int fmid(int *x,int max,int min){
+    int sum=x[0]+x[1]+x[2];
+    return sum-max-min;
+}
+
+
+int main(){
+    int n;  //输入三位整数
+    scanf("%d",&n);
+    
+    int *x=a(n); //z会变化的数组
+
+    if (n < 100 || n > 999) {
+        printf("输入不是三位数\n");
+        return 1;
+    }
+
+    //判断
+    if(x[0]==x[1] && x[1]==x[2]){
+        printf("输入数字不正确，数字需要是不全相同的三位数");
+        return 1;
+    }
+    int i=0;  //次数
+    int re=n;
+    while(re!=495){
+        printf("第%d次重排求差得：",i);
+        i++;
+        int max=fmax(x);
+        int min=fmin(x);
+        int mid=fmid(x,max,min);
+        int x1=max*100+mid*10+min;
+        int x2=min*100+mid*10+max;
+        re=x1-x2;
+        printf("%d-%d=%d\n",x1,x2,re);
+        x=a(re);
+    }
+    printf("经过 %d 次操作后到达黑洞数 495。\n",i);
     return 0;
 }

@@ -38,6 +38,9 @@ int main(){
 }
 */
 //所以你写的输出方法（按列优先取数）没有达到最大和，
+//2218C
+
+//我去蠢死了交到221B去了 我服了 怪不得次次 WA
 
 #include <iostream>
 using namespace std;
