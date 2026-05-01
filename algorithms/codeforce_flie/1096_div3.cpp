@@ -210,19 +210,27 @@ int main(){
 
         vector<int> first(n,-1),last(n,-1);
         for(int i=0;i<2*n;++i){
-            if(first[a[i]]==-1) first[a[i]]==i;
+            if(first[a[i]]==-1) first[a[i]]=i;
             else last[a[i]]=i;
         }
-        int ans=1;
-        int L=first[0],R=last[0];
-        for(int i=1;i<n;++i){
-            int l=first[i],r=last[i];
-            if(l<L && r<R){
-                ++ans;
+        int ans = 0;
+        // 尝试从每个数字开始？实际上，我们应该从0开始，但0可能不是最内层。我们可以直接模拟上述过程。
+        int L = first[0], R = last[0];
+        int cur = 1; // 已经包含了0，下一个检查1
+        while (cur < n) {
+            int l = first[cur], r=last[cur];
+            if (l>=L && r<=R) {
+                // 当前区间已经包含cur
+                cur++;
+            } else if (l<L && r>R) {
+                // cur的区间完全包含当前区间，扩大
+                L=l;R=r;
+                cur++;
             }else{
                 break;
             }
         }
+        ans = cur; // 0..cur-1都被包含，所以mex=cur
         cout<<ans<<endl;
     }
 
