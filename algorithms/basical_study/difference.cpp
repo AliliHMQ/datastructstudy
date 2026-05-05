@@ -43,3 +43,6 @@ int main(){
     for(int i=0;i<=n;i++) cout<<b[i]<<" ";
     return 0;
 }
+
+
+//数一下，准备明天学
