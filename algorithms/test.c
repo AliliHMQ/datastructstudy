@@ -853,7 +853,7 @@ int main(){
 
 //验证
 //生成全部的不同的三位数 验证是否都会回到495
-
+/*
 #include <stdio.h>
 
 
@@ -922,5 +922,152 @@ int main(){
         x=a(re);
     }
     printf("经过 %d 次操作后到达黑洞数 495。\n",i);
+    return 0;
+}*/
+
+//项目一
+
+/*
+1、输入一个正整数n（0<n<9） n个从小到大排好顺序的整数
+2、再输入一个整数x
+3、把x插入到这组数据中，使该组数据仍然有序
+*/
+
+/*
+思考角度，加上x的数组排序，由于数据量小，选择冒泡或选择排序
+*/
+/*
+#include <stdio.h>
+const int N=20;
+int q[N]={};
+
+//优化冒泡排序
+void bable_sort(int *q,int x){
+    int flag=1;
+    while(flag){
+        flag=0;
+        for(int i=0;i<x-1;i++){
+            if(q[i]>q[i+1]){
+                flag=1;
+                int p=q[i];
+                q[i]=q[i+1];
+                q[i+1]=p;
+            }
+        }
+    }
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&q[i]);
+    }
+    scanf("%d",&q[n]);
+
+    bable_sort(q,n+1);
+
+    for(int i=0;i<=n;i++){
+        printf("%d ",q[i]);
+    }
+    return 0;
+}*/
+
+
+//项目二  字符串转换成十进制整数
+/*
+1、输入一个以#结束的字符串
+
+2、滤去所有的非十六进制字符（不分大小写），
+1-9 a-f A-F
+3、组成一个新的表示十六进制数字的字符串
+4、然后将其转换为十进制数后输出。
+ps.如果在第一个十六进制字符之前存在字符“-” 则为负数
+*/
+
+/* 思考
+1、用字符串存储
+判断第一个字符 分正负
+2、开一个新的字符串，判断，符合则加入
+3、输出数字
+*/
+/*
+#include <stdio.h>
+#include <string.h>
+
+const int N=1e6+10; //够大了
+
+int main(){
+    char ch;
+    char a[N]={};
+    char b[N]={};
+    
+    int re=0;
+    int x=0;
+    while((ch=getchar())!='#'){
+        a[x++]=ch;
+        if((ch>='0' && ch<='9') ||  (ch>='a' && ch<='f') || (ch>='A' && ch<='F') ){
+            b[re]=ch;
+            re++;
+        }
+    }
+    long long res=0;
+    for(int i=0;i<re;i++){
+        char c=b[i];
+        int d;
+        if(c>='0'&& c<='9') d=c-'0';
+        else if(c>='a' && c<='f') d=c-'a'+10;
+        else if(c>='A' && c<='F') d=c-'A'+10;
+        res=res*16+d;
+    }
+    if(a[0]=='-'){
+        printf("-");
+    }
+    printf("%lld",res);
+    return 0;
+}
+*/
+//
+#include <stdio.h>
+
+const int N = 1e6 + 10;
+
+int main() {
+    char ch;
+    char b[N];
+    int len=0;
+    int sign=1;          // 1正 -1负
+    int found=0;         // 是否已遇到第一个十六进制字符
+
+    while ((ch=getchar())!='#') {
+        if ((ch >= '0' && ch <= '9') ||
+            (ch >= 'a' && ch <= 'f') ||
+            (ch >= 'A' && ch <= 'F')) {
+            if (!found) {
+                found=1;
+            }
+            b[len++]=ch;
+        } else {
+            if (!found && ch=='-') {
+                sign=-1;   // 在第一个十六进制字符前遇到负号
+            }
+        }
+    }
+    if (len==0) {
+        printf("0\n");
+        return 0;
+    }
+
+    long long res=0;
+    for (int i=0;i<len;i++) {
+        char c=b[i];
+        int d;
+        if(c>='0'&& c<='9') d=c-'0';
+        else if(c>='a' && c<='f') d=c-'a'+10;
+        else  d=c-'A'+10;
+        res=res*16+d;
+    }
+
+    printf("%lld\n", sign*res);
     return 0;
 }
