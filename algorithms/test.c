@@ -1028,6 +1028,8 @@ int main(){
 }
 */
 //
+
+/*
 #include <stdio.h>
 
 const int N = 1e6 + 10;
@@ -1069,5 +1071,141 @@ int main() {
     }
 
     printf("%lld\n", sign*res);
+    return 0;
+}
+*/
+
+//结构体学习
+/*
+#include <stdio.h>
+#include <stdlib.h> //有malloc函数
+#define LEN sizeof(struct student)  //每次动态开辟的空间大小，统一管理
+
+struct student{     //创建动态单链表
+    int n;
+    char name[20];
+    struct student * next; //链接下一个元素组的地址
+};
+
+//建立联系
+int n=0; // // 全局变量记录节点个数（可保留供调试）
+struct student * creat(void){ //定义函数 填写下一个元素组的地址 返回指向链表头的指针
+    struct student * head=NULL;
+    struct student * p1,*p2=NULL;
+    
+    p1=(struct student *)malloc(LEN); //开辟一个定义大小的单元
+    if(p1==NULL){
+        printf("内存分配失败\n");
+        return NULL;
+    }
+    printf("请输入学号和姓名（格式：学号,姓名），输入学号0结束：\n");
+    scanf("%d,%s",&p1->n,p1->name);
+
+    while(p1->n!=0){   //只要有输入就开辟一个加上一个链表元素
+        n++;
+        if(n==1){
+            head=p1;        //第一个节点作为开头
+        }else p2->next=p1;  //链接新节点
+        //接下来
+        p2=p1;      //p2指向当前最后一个有效节点
+        //创建下一个节点
+        p1=(struct student *)malloc(LEN);
+        scanf("%d,%s",&p1->n,p1->name);
+        //p2->next=NULL;
+    }
+    // 使最后一个有效节点的 next 指向 NULL
+    if (p2 != NULL) {
+        p2->next = NULL;
+    }
+
+    // 释放最后输入 n=0 的那个无用节点
+    if (p1 != NULL) {
+        free(p1);
+    }
+
+    return head;   // 返回链表头指针
+}
+
+int main(){
+    struct student * p1;
+    p1=creat();
+    //printf("\nn:%d\nname:%d\n",p1->n,p1->name); //输出第一个节点的成员值 (=v=)
+    if (p1 != NULL) {
+        printf("\n第一个学生的信息：\n学号：%d\n姓名：%s\n", p1->n, p1->name);
+    } else {
+        printf("链表为空，没有输入任何有效数据。\n");
+    }
+    return 0;
+}
+*/
+
+//学生管理系统
+#include<stdio.h>
+#include<string.h>
+int Count;
+struct student{
+    char sno[20],name[20];
+    int math,english,chinese,sum;
+};
+
+void print(struct student stu){
+    printf("%s %s %d %d %d %d\n",stu.sno,stu.name,stu.math,stu.english,stu.chinese,stu.sum);
+}
+
+void query_stu(struct student s[],char *name){
+    /*********Begin*********/
+    
+
+    /*********End**********/
+}
+
+void delete_stu(struct student s[],char *sno){
+    /*********Begin*********/
+
+
+    /*********End**********/
+}
+
+void update_stu(struct student s[],char *sno,int math,int english,int chinese){
+    /*********Begin*********/
+
+
+    /*********End**********/
+}
+
+int main(void)
+{
+    int n,q;
+    struct student students[50];
+    scanf("%d%d",&n,&q);
+    Count=n;
+    for(int i=0;i<n;i++){
+        /*********Begin*********/
+
+        /*********End**********/
+    }
+    while(q--){
+        int op;
+        scanf("%d",&op);
+        char sno[20],name[20];
+        if(op==1){
+            scanf("%s",name);
+            query_stu(students,name);
+        }
+        else if(op==2){
+            int a,b,c;
+            scanf("%s%d%d%d",sno,&a,&b,&c);
+            update_stu(students,sno,a,b,c);
+            for(int i=0;i<Count;i++){
+                print(students[i]);
+            }
+        }
+        else{
+            scanf("%s",sno);
+            delete_stu(students,sno);
+            for(int i=0;i<Count-1;i++)
+                print(students[i]);
+        }
+    }
     return 0;
 }
