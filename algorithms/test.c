@@ -1154,22 +1154,39 @@ void print(struct student stu){
 
 void query_stu(struct student s[],char *name){
     /*********Begin*********/
-    
-
+    for (int i = 0; i < Count; i++) {
+        if (strcmp(s[i].name, name) == 0) {
+            print(s[i]);
+        }
+    }
     /*********End**********/
 }
 
 void delete_stu(struct student s[],char *sno){
     /*********Begin*********/
-
-
+    for (int i = 0; i < Count; i++) {
+        if (strcmp(s[i].sno, sno) == 0) {
+            // 将后面的元素依次前移，覆盖掉要删除的元素
+            for (int j = i; j < Count - 1; j++) {
+                s[j] = s[j + 1];
+            }
+            break;  // 学号唯一，找到后即可退出
+        }
+    }
     /*********End**********/
 }
 
 void update_stu(struct student s[],char *sno,int math,int english,int chinese){
     /*********Begin*********/
-
-
+    for (int i = 0; i < Count; i++) {
+        if (strcmp(s[i].sno, sno) == 0) {
+            s[i].math = math;
+            s[i].english = english;
+            s[i].chinese = chinese;
+            s[i].sum = math + english + chinese;
+            break;
+        }
+    }
     /*********End**********/
 }
 
@@ -1181,7 +1198,10 @@ int main(void)
     Count=n;
     for(int i=0;i<n;i++){
         /*********Begin*********/
-
+        scanf("%s %s %d %d %d", 
+              students[i].sno, students[i].name, 
+              &students[i].math, &students[i].english, &students[i].chinese);
+        students[i].sum = students[i].math + students[i].english + students[i].chinese;
         /*********End**********/
     }
     while(q--){
