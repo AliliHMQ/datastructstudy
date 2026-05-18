@@ -26,7 +26,7 @@ int main(){
 
 
 //P5738 【深基7.例4】歌唱比赛
-
+/*
 #include <iostream>
 using namespace std;
 
@@ -71,5 +71,56 @@ int main(){
     //cout << maxt << endl;
     re2=(double)maxt/(m-2);
     printf("%.2f",re2);
+    return 0;
+}
+*/
+
+//P5740 【深基7.例9】最厉害的学生
+/*
+每名同学的信息：
+姓名（不超过 8 个字符的仅有英文小写字母的字符串）、
+语文、数学、英语成绩（均为不超过 150 的自然数）。
+总分最高的学生就是最厉害的，
+
+请输出最厉害的学生各项信息
+（姓名、各科成绩）。
+如果有多个总分相同的学生，
+输出靠前的那位。
+*/
+
+/*
+分析，
+1、使用结构体，存储学生信息
+建立学生数组
+2、计算总分
+3、总分排序 最多1000人，冒泡排序
+*/
+
+#include <iostream>
+using namespace std;
+
+const int N=1010;
+
+struct stu{
+    char a[10]={};
+    int x1,x2,x3,re;
+}stu[N];
+
+int main(){
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        scanf("%s %d %d %d",stu[i].a,&stu[i].x1,&stu[i].x2,&stu[i].x3);
+        stu[i].re=stu[i].x1+stu[i].x2+stu[i].x3;
+    }
+    int max=stu[0].re;
+    int x=0;
+    for(int i=0;i<n;i++){
+        if(stu[i].re>max){
+            max=stu[0].re;
+            x=i;
+        }
+    }
+    printf("%s %d %d %d",stu[x].a,&stu[x].x1,&stu[x].x2,&stu[x].x3);
     return 0;
 }
