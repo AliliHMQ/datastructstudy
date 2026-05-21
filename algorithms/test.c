@@ -1140,6 +1140,7 @@ int main(){
 */
 
 //学生管理系统
+/*
 #include<stdio.h>
 #include<string.h>
 int Count;
@@ -1153,17 +1154,17 @@ void print(struct student stu){
 }
 
 void query_stu(struct student s[],char *name){
-    /*********Begin*********/
+    
     for (int i = 0; i < Count; i++) {
         if (strcmp(s[i].name, name) == 0) {
             print(s[i]);
         }
     }
-    /*********End**********/
+    
 }
 
 void delete_stu(struct student s[],char *sno){
-    /*********Begin*********/
+    
     for (int i = 0; i < Count; i++) {
         if (strcmp(s[i].sno, sno) == 0) {
             // 将后面的元素依次前移，覆盖掉要删除的元素
@@ -1173,11 +1174,11 @@ void delete_stu(struct student s[],char *sno){
             break;  // 学号唯一，找到后即可退出
         }
     }
-    /*********End**********/
+   
 }
 
 void update_stu(struct student s[],char *sno,int math,int english,int chinese){
-    /*********Begin*********/
+    
     for (int i = 0; i < Count; i++) {
         if (strcmp(s[i].sno, sno) == 0) {
             s[i].math = math;
@@ -1187,7 +1188,7 @@ void update_stu(struct student s[],char *sno,int math,int english,int chinese){
             break;
         }
     }
-    /*********End**********/
+    
 }
 
 int main(void)
@@ -1197,12 +1198,12 @@ int main(void)
     scanf("%d%d",&n,&q);
     Count=n;
     for(int i=0;i<n;i++){
-        /*********Begin*********/
+        
         scanf("%s %s %d %d %d", 
               students[i].sno, students[i].name, 
               &students[i].math, &students[i].english, &students[i].chinese);
         students[i].sum = students[i].math + students[i].english + students[i].chinese;
-        /*********End**********/
+       
     }
     while(q--){
         int op;
@@ -1227,5 +1228,191 @@ int main(void)
                 print(students[i]);
         }
     }
+    return 0;
+}
+*/
+
+//[项目一]
+//利用函数计算素数个数并求和: 
+//输入 2 个正整数 m 和 n（2<=m, n<=500），
+
+//统计并输出m 到 n 之间的素数的个数
+
+//以及这些素数的和。
+//要求定义并调用函数 prime(m) 
+//判断 m 是否为素数，当 m 为素数时
+//返回 1，否则返回 0。
+/*
+#include <stdio.h>
+
+int prime(int m){
+    int re=0;
+    if(m==1){
+        return 0;
+    }else if(m==2){
+        return 1;
+    }else{
+        for(int i=2;i<m;i++){
+            if(m%i==0){
+                re++;
+                return 0;
+                break;
+            }
+        }
+        if(!re){
+            return 1;
+        }
+    }
+}
+
+int main(){
+    int n,m,sum=0;
+    scanf("%d %d",&n,&m);
+    int re=0;
+    //n到m
+    for(int i=n;i<=m;i++){
+        if(prime(i)){
+            re++;
+            sum+=i;
+        }
+    }
+    printf("%d %d",re,sum);
+    return 0;
+}
+*/
+
+/*
+输入年 year，输出该年 1~12 月每个月的天数。
+定义并调用函数month_days(year, month)，
+该函数返回 year 年 month 月的天数。
+*/
+/*
+#include <stdio.h>
+
+int month_days(int x,int y){
+    if(y==1 || y==3 || y==5 || y==7 || y==8 || y==10 || y==12){
+        return 31;
+    }else if(y==4 || y==6 || y==9 || y==11){
+        return 30;
+    }else if(x%100!=0 && x%4==0 || x%400==0){
+        return 29;
+    }else{
+        return 28;
+    }
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=1;i<=12;i++){
+        printf("%d %d\n",n,month_days(n,i));
+    }
+    return 0;
+}
+*/
+
+//利用指针找数组最大值：
+//输入n(n<=10)个整数并存入数组中，
+//利用指针操作数组元素找出最大值，输出到屏幕上。
+
+//指针操作数组
+/*
+#include <stdio.h>
+
+const int n=11;
+int a[n]={};
+
+int max(int *a,int n){
+    int max=a[0];
+    for(int i=0;i<n;i++){
+        if(a[i]>max){
+            max=a[i];
+        }
+    }
+    return max;
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    int re=max(a,n);
+    printf("%d",re);
+    return 0;
+}
+*/
+
+/*
+(1)求第一门课程的平均分；
+
+（2）找出两门以上课程不及格的学生，
+输出他们的全部课程成绩及平均成绩；
+
+（3）找出平均成绩在90分以上或
+全部课程成绩都在85分以上的学生，
+输出他们的全部课程成绩及平均成绩。
+*/
+
+/*
+编写函数实现
+*/
+
+#include <stdio.h>
+
+double re1(int (*a)[5]){
+    double sum1=0;
+    for(int i=0;i<4;i++){
+        sum1+=a[i][0];
+    }
+    return sum1/4.0;
+}
+
+void sum(int (*a)[5],int x){
+    int re=0;
+    for(int i=0;i<5;i++){
+        if(a[x][i]<=59){
+            re++;
+        }
+    }
+    if(re>=2){
+        int sumre=0;
+        for(int i=0;i<5;i++){
+            sumre+=a[x][i];
+            printf("%d ",a[x][i]);
+        }
+        //printf("%d %d %d %d %d ",a[x][0],a[x][1],a[x][2],a[x][3],a[x][4]);
+        printf("%lf\n",sumre/5.0);
+    }
+}
+
+void prin(int (*a)[5]){
+    for(int i=0;i<4;i++){
+        int re=0;
+        int sum=0;
+        for(int j=0;j<5;j++){
+            sum+=a[i][j];
+            if(a[i][j]<85){
+                re++;
+            }
+        }
+        if(!re || sum>=450){
+            printf("%d %d %d %d %d ",a[i][0],a[i][1],a[i][2],a[i][3],a[i][4]);
+            printf("%lf\n",sum/5.0);
+        }
+    }
+}
+
+int main(){
+    double re11;
+    int a[4][5]={34,56,88,99,89,27,88,99,67,78,99,90,87,86,89,78,89,99,56,77};
+    re11=re1(a);
+    printf("%lf\n",re11);
+    //不及格学生
+    for(int i=0;i<4;i++){
+        sum(a,i);
+    }
+    prin(a);
     return 0;
 }
