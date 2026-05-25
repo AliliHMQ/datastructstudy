@@ -1358,7 +1358,7 @@ int main(){
 /*
 编写函数实现
 */
-
+/*
 #include <stdio.h>
 
 double re1(int (*a)[5]){
@@ -1414,5 +1414,67 @@ int main(){
         sum(a,i);
     }
     prin(a);
+    return 0;
+}
+*/
+
+/*
+输入一段字符
+(由空格、字母和数字几种组成，保证开头不为空格)，
+里面有若干个字符串，
+求这些字符串的长度和，
+并输出最长字符串内容,
+如果有多个输出最先出现的那个字符串。
+以stop作为最后输入的字符串。
+*/
+
+#include<stdio.h>
+#include <string.h>
+int main(void)
+{
+    /*********Begin*********/
+    char s[101],w[101],b[101];
+    while(fgets(s,101,stdin)){
+        s[strcspn(s,"\n")]=0;
+        if(strcmp(s,"stop")==0)break;
+        int sum=0,max=0;
+        char *p=s;
+        while(*p){
+            while(*p==' ')p++;
+            if(!*p)break;
+            char *q=p;
+            while(*q&&*q!=' ')q++;
+            int len=q-p;
+            sum+=len;
+            if(len>max){
+                max=len;
+                strncpy(w,p,len);
+                w[len]=0;
+            }
+            p=q;
+        }
+        printf("%d %s\n",sum,w);
+    }
+    return 0;
+
+    /*********End**********/
+    return 0;
+}
+
+
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+    /*********Begin*********/
+    char a[101],b[101],c[101];
+    scanf("%100s%100s%100s",a,b,c);
+    char *x=a,*y=b,*z=c;
+    // 冒泡排序思想：两两比较交换指针
+    if(strcmp(x,y)>0){ char *t=x; x=y; y=t; }
+    if(strcmp(x,z)>0){ char *t=x; x=z; z=t; }
+    if(strcmp(y,z)>0){ char *t=y; y=z; z=t; }
+    printf("%s\n%s\n%s\n",x,y,z);
+    /*********End**********/
     return 0;
 }
