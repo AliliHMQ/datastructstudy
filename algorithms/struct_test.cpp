@@ -96,6 +96,7 @@ int main(){
 3、总分排序 最多1000人，冒泡排序
 */
 
+/*
 #include <iostream>
 using namespace std;
 
@@ -124,4 +125,50 @@ int main(){
     printf("%s %d %d %d",stu[x].a,stu[x].x1,stu[x].x2,stu[x].x3);
     return 0;
 }
+*/
 
+
+// 6.1 儿童节快乐啊！六月全勤计划！
+//P5741 【深基7.例10】旗鼓相当的对手 - 加强版
+
+
+//某对学生每一科成绩的分差都不大于 5
+//且总分分差不大于 10
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>   // 新增：保证 abs 函数可用
+using namespace std;
+
+const int N=1005;
+
+struct stus{
+    char nam[10];
+    int num1,num2,num3;
+    int sum;
+}stu[N];        //结构体命名与机构体类型命名请区分开来
+
+bool panduan(const stus& a, const stus& b){            //绝对值函数很好用哦
+    if (abs(a.sum - b.sum) > 10) return false;
+    // 各科分差绝对值 ≤ 5
+    if (abs(a.num1 - b.num1) > 5) return false;
+    if (abs(a.num2 - b.num2) > 5) return false;
+    if (abs(a.num3 - b.num3) > 5) return false;
+    return true;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        scanf("%s %d %d %d",stu[i].nam,&stu[i].num1,&stu[i].num2,&stu[i].num3);
+        stu[i].sum=stu[i].num1+stu[i].num2+stu[i].num3;
+    }
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(panduan(stu[i],stu[j])){
+                printf("%s %s\n",stu[i].nam,stu[j].nam);
+            }
+        }
+    }
+    return 0;
+}
