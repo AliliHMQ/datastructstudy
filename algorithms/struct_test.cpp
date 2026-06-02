@@ -134,6 +134,7 @@ int main(){
 
 //某对学生每一科成绩的分差都不大于 5
 //且总分分差不大于 10
+/*
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>   // 新增：保证 abs 函数可用
@@ -169,6 +170,54 @@ int main(){
                 printf("%s %s\n",stu[i].nam,stu[j].nam);
             }
         }
+    }
+    return 0;
+}
+*/
+
+//P5742 【深基7.例11】评等级
+//结构体里面构建函数 怎么做
+
+//现有 N 名同学
+//学号、学业成绩 素质拓展成绩、综合分数（实数）
+//并且计算综合分数（分别按照 70% 和 30% 权重累加）
+//还需要在结构体中定义一个成员函数，
+//返回该结构体对象的  学业成绩和素质拓展成绩的总分 五个量
+
+/*
+本题存在精度误差问题，请将 a * 0.7 + b * 0.3 与 80 比较 转化为 a * 7 + b * 3 与 800 比较。
+当然通过本题很容易啦，本题只是为了帮助你训练结构体的使用方法。
+*/
+
+#include <iostream>
+using namespace std;
+
+struct stu{
+    int a;
+    int b,c,d;
+    int s(){
+        return b+c;
+    }
+    
+}students[1005];
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    int i=0;
+    while(n--){
+        scanf("%d %d %d",&students[i].a,&students[i].b,&students[i].c);
+        students[i].d=students[i].b*7+students[i].c*3;
+        i++;
+    }
+    int j=0;
+    while(j<i){
+        if(students[j].s()>140 && students[j].d>=800){
+            printf("Excellent\n");
+        }else{
+            printf("Not excellent\n");
+        }
+        j++;
     }
     return 0;
 }
