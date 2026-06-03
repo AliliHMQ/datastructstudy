@@ -226,7 +226,7 @@ int main(){
 
 //正整数 n 是两个不同的质数的乘积
 //求出两者中较大的那个质数
-
+/*
 #include<iostream>
 using namespace std;
 
@@ -236,7 +236,8 @@ int m(long long int x){
     }else{
         for(long long int i=3;i<x;i++){
             if(x%i==0){
-                
+                return 0;
+                break;
             }
         }
         return 1;
@@ -244,6 +245,36 @@ int m(long long int x){
 }
 
 int main(){
+    long long int n;
+    scanf("%lld",&n);
+    int re=1;
+    for(long long int i=3;i<n;i++){
+        if(n%i==0 && m(i)==1 && i>re){
+            re=i;
+        }
+    }
+    printf("%lld\n",re);
+    return 0;
+}
+*/
 
+//正整数 n 是两个不同的质数的乘积
+//求出两者中较大的那个质数
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main(){
+    long long int n;
+    scanf("%lld",&n);
+    long long int re=0;
+    for(long long i=2;i*i<n;i++){
+        if(n%i==0){
+            re=i;
+            break;
+        }
+    }
+    printf("%d",n/re);
     return 0;
 }
