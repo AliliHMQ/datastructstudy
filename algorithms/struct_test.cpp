@@ -188,6 +188,7 @@ int main(){
 本题存在精度误差问题，请将 a * 0.7 + b * 0.3 与 80 比较 转化为 a * 7 + b * 3 与 800 比较。
 当然通过本题很容易啦，本题只是为了帮助你训练结构体的使用方法。
 */
+/*
 
 #include <iostream>
 using namespace std;
@@ -219,5 +220,30 @@ int main(){
         }
         j++;
     }
+    return 0;
+}
+*/
+
+//正整数 n 是两个不同的质数的乘积
+//求出两者中较大的那个质数
+
+#include<iostream>
+using namespace std;
+
+int m(long long int x){
+    if(x%2==0){
+        return 0;
+    }else{
+        for(long long int i=3;i<x;i++){
+            if(x%i==0){
+                
+            }
+        }
+        return 1;
+    }
+}
+
+int main(){
+
     return 0;
 }
