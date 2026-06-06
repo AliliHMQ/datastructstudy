@@ -84,3 +84,39 @@ int main() {
     }
     return 0;
 }
+
+
+//数学原理，质数与合数的数学规律
+//x为质数或1 答案为1
+//x为合数，答案为 n/2 取整，即向上取整
+//正整数集合中，质数的补集包含 1 和所有合数
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPrime(int n) {
+    if (n < 2) return false;
+    if (n == 2 || n == 3) return true;
+    if (n % 2 == 0) return false;
+    int limit = sqrt(n);
+    for (int i = 3; i <= limit; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int n;
+        cin >> n;
+        if (n == 1 || isPrime(n)) cout << 1 << endl;
+        else cout << n / 2 << endl;
+    }
+    return 0;
+}
+
+
+//学习准备项目，两个，一个贪吃蛇，一个操作系统项目
