@@ -1427,12 +1427,12 @@ int main(){
 如果有多个输出最先出现的那个字符串。
 以stop作为最后输入的字符串。
 */
-
+/*
 #include<stdio.h>
 #include <string.h>
 int main(void)
 {
-    /*********Begin*********/
+    
     char s[101],w[101],b[101];
     while(fgets(s,101,stdin)){
         s[strcspn(s,"\n")]=0;
@@ -1457,16 +1457,16 @@ int main(void)
     }
     return 0;
 
-    /*********End**********/
+    
     return 0;
 }
-
-
+*/
+/*
 #include<stdio.h>
 #include<string.h>
 int main(void)
 {
-    /*********Begin*********/
+    
     char a[101],b[101],c[101];
     scanf("%100s%100s%100s",a,b,c);
     char *x=a,*y=b,*z=c;
@@ -1475,6 +1475,34 @@ int main(void)
     if(strcmp(x,z)>0){ char *t=x; x=z; z=t; }
     if(strcmp(y,z)>0){ char *t=y; y=z; z=t; }
     printf("%s\n%s\n%s\n",x,y,z);
-    /*********End**********/
+    
     return 0;
+}
+*/
+
+
+
+//复习内容
+//1.字符串函数，整体输入用 scanf("%[^\n]s",str); getchar()吃掉\n;
+#include <string.h>
+#include <stdio.h>
+
+
+
+int main() {
+	long long n = 0;
+	scanf("%lld", &n);
+	getchar();
+	for (long long i = 0; i < n; i++) {
+		char arr[1000];
+		scanf("%[^\n]s", arr);
+		getchar();
+		int len = strlen(arr);
+		for (int j = len - 1; j >= 0; j--) {
+			printf("%c", arr[j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
 }
