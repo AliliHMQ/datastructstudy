@@ -1495,7 +1495,7 @@ int main() {
 	getchar();
 	for (long long i = 0; i < n; i++) {
 		char arr[1000];
-		scanf("%[^\n]s", arr);
+		scanf("%999[^\n]s", arr);  //标准不同会报错
 		getchar();
 		int len = strlen(arr);
 		for (int j = len - 1; j >= 0; j--) {
@@ -1505,4 +1505,119 @@ int main() {
 	}
 
 	return 0;
+}
+
+//替换最后一位为 “\0”
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    getchar();
+    while(n--){
+        char str[1010]={};
+        fgets(str,sizeof(str),stdin);//会有'\n'    ''\0    '
+        int a=strlen(str);
+        if (a> 0 && str[a-1] == '\n')
+            str[a-1] = '\0';
+        for(int i=a-1;i>=0;i--){
+            printf("%c",str[i]);
+        }
+        
+        printf("\n");
+    }
+
+    return 0;
+}
+
+//密码设计
+#include <stdio.h>
+#include <string.h>
+
+int a=0,b=0,c=0,d=0,e=0,w=0;
+
+void panduan(char m[110],int x){
+    if(x>=8 && x<=24){
+        a=1;
+    }
+    for(int i=0;i<=x-1;i++){
+        int g=0;
+        if(m[i]>='A' && m[i]<='Z'){
+            b=1;
+        }else{
+            g+=1;
+        }
+        if(m[i]>='a' && m[i]<='z'){
+            c=1;
+        }else{
+            g+=1;
+        }
+        if(m[i]>='0' && m[i]<='9'){
+            d=1;
+        }else{
+            g+=1;
+        }
+        if(m[i]=='.' || m[i]=='!' || m[i]=='@'||m[i]=='%'){
+            e=1;
+        }else{
+            g+=1;
+        }
+        if(g==4){
+            w=1;
+        }
+    }
+}
+
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    while(n--){
+        a=0,b=0,c=0,d=0,e=0,w=0;
+        char str[110]={};
+        scanf("%s",str);
+        int x=strlen(str);
+        panduan(str,x);
+        if(a && !w){
+            if(b+c+d+e>=3){
+                printf("GOOD PASSWORD\n");
+            }else{
+                printf("BAD PASSWORD\n");
+            }
+        }else{
+            printf("ERROR\n");
+        }
+    }
+    return 0;
+}
+
+
+//scanf(" %c", &a[i][j]) 读取一个字符（单个字符），并且在读取前会跳过所有空白字符（包括空格、换行、制表符等）
+//经过旋转、拉伸、平移、缩放之后的。
+//单纯正向判断，还有未考虑情况
+
+#include <stdio.h>
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    
+    while(n--){
+        char a[25][25]={0};
+        int x,y;
+        scanf("%d %d",&x,&y);
+        for(int i=0;i<x;i++){
+            for(int j=0;j<y;j++){
+                scanf(" %c",&a[i][j]);
+            }
+        }
+        if(a[1][1]=='1'){
+            printf("Y\n");
+        }else{
+            printf("O\n");
+        }
+     
+    }
+    return 0;
 }
