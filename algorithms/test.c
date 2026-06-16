@@ -1484,6 +1484,7 @@ int main(void)
 
 //复习内容
 //1.字符串函数，整体输入用 scanf("%[^\n]s",str); getchar()吃掉\n;
+/*
 #include <string.h>
 #include <stdio.h>
 
@@ -1618,6 +1619,67 @@ int main(){
             printf("O\n");
         }
      
+    }
+    return 0;
+}
+
+//复习牛顿迭代法
+
+
+
+#include <stdio.h>
+#include <math.h>
+int main() {
+     double a,b,c,d,m; 
+     while(scanf("%lf%lf%lf%lf%lf",&a,&b,&c,&d,&m)==5){               //== 5 就是在判断：是否真的成功读到了 5 个数。
+        double x=m;
+         for(int i=0;i<100;i++){ 
+            double fx=a*x*x*x+b*x*x+c*x+d, fpx=3*a*x*x+2*b*x+c; 
+            if(fabs(fpx)<1e-12) break; 
+            double nx=x-fx/fpx; 
+            if(fabs(nx-x)<1e-8){ 
+            x=nx;
+            break;
+          } 
+          x=nx; 
+      } 
+      printf("%.3lf\n",x); 
+      } 
+     return 0;
+ }
+*/
+
+//复习冒泡排序
+#include <stdio.h>
+#include <stdbool.h>
+
+const int N=1e5+10;
+int a[N];
+
+void bubble_sort(int q[],int n){
+    bool flag=1;
+    while(flag){
+        flag=0;
+        for(int i=0;i<n-1;i++){
+            if(q[i]>q[i+1]){
+                flag=1;
+                int x=q[i];
+                q[i]=q[i+1];
+                q[i+1]=x;
+            }
+        }
+    }
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    bubble_sort(a,n);
+    for(int i=0;i<n;i++){
+        printf("%d ",a[i]);
     }
     return 0;
 }
