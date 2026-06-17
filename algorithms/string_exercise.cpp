@@ -262,3 +262,47 @@ int main(){
 //今天是运动会好累（吃饱喝足很累，明天上午去学去）
 //对了对了我超级厉害的？
 //好奇代码奔腾，去看看
+
+
+/*
+字符串统计，手写比较函数 panduan()
+
+#include <stdio.h>
+#include <string.h>
+
+int panduan(char str[],int i){
+    int sum=0;
+    char s[8]={'E','n','g','l','i','s','h'};
+    for(int j=0;j<7;j++){
+        if(s[j]==str[i+j]){
+            sum++;
+        }
+    }
+    if(sum==7){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+int main(){
+    //char s[8]={'E','n','g','l','i','s','h'};
+    char str[10010];
+    int re;
+    int n;
+    scanf("%d",&n);
+    while(n--){
+        re=0;
+        scanf("%s",str);
+        int n1=strlen(str);
+        for(int i=0;i<=n1-7;i++){
+            if(str[i]=='E'){
+                int x=panduan(str,i);
+                re+=x;
+            }
+        }
+        printf("%d\n",re);
+    }
+    return 0;
+}
+*/
