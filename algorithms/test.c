@@ -1683,3 +1683,171 @@ int main(){
     }
     return 0;
 }
+
+
+/*
+#include <stdio.h>
+
+
+
+int main(){
+    int m,n;
+    int a[210][210]={};
+    scanf("%d %d",&m,&n);
+    for()
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                scanf("%d",&a[i][j]);
+            }
+        }
+        for(int i=0;i<m;i++){
+            printf("%d ",a[i][0]);
+        }
+        for(int j=1;j<n;j++){
+            printf("%d ",a[m-1][j]);
+        }
+        for(int i=m-2;i>0;i--){
+            printf("%d ",a[i][n-1]);
+        }
+        for(int j=n-1;j>0;j--){
+            printf("%d ",a[0][j]);
+        }
+    }
+    return 0;
+}
+
+*/
+
+////
+#include <stdio.h>
+
+int main(){
+    int m,n;
+    scanf("%d %d",&m,&n);
+    int a[210][210];
+    int re[40010]={};
+    for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                scanf("%d",&a[i][j]);
+            }
+    }
+    
+    int lt=0,rt=n-1,tp=0,bt=m-1;
+    while(lt<=rt && tp<=bt){
+        for(int i=tp;i<=bt;i++)
+            printf("%d ",a[i][lt]);
+            lt++;
+         //从上到下
+       
+        for(int i=lt;i<=rt;i++)
+            printf("%d ",a[bt][i]);
+            bt--;
+        //从左到右
+    
+        if(rt>=lt){
+        for(int i=bt;i>=tp;i--)
+            printf("%d ",a[i][rt]);
+            rt--;
+        
+        }//从下到上
+
+        if(tp<=bt){
+        for(int i=rt;i>=lt;i--)
+            printf("%d ",a[tp][i]); 
+            tp++;
+        }//从右到左
+    }
+
+    return 0;
+}
+
+
+
+//
+#include <stdio.h>
+
+int n=1e4;
+
+int fei(int x){
+    int a[n];
+    int sum=0;
+    a[1]=1,a[2]=1;  
+    for(int i=3;i<=x;i++){
+        a[i]=a[i-1]+a[i-2];
+    }
+    for(int i=1;i<x;i++){
+        sum+=a[i];
+    }
+    return sum;
+}
+
+int main(){
+    int w;
+    scanf("%d",&w);
+    while(w--){
+        int d;
+        scanf("%d",&d);
+        int re=0;
+        while(fei(re)<=d){
+            re++;
+        }
+        printf("%d\n",re-2);
+    }
+    return 0;
+}
+
+
+//
+#include <stdio.h>
+
+long long int fei(int x){
+    if(x==1 || x==2){
+        return 1;
+    }else{
+        return fei(x-1)+fei(x-2);
+    }
+}
+
+int main(){
+    int n;
+    while(scanf("%d",&n)==1){
+        if(fei(n)){
+            printf("YES\n");
+        }else{
+            printf("No\n");
+        }
+    }
+    return 0;
+}
+
+//
+#include <stdio.h>
+#include <string.h>
+
+const int N=1e4+10;
+
+int main(){
+    char s[27]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char a[27]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    /*for(int i=0;i<26;i++){
+            printf("%c:\n",s[i]);
+        }*/
+    int re[27]={0};
+    char str[1010]={};
+    getchar();
+    while(scanf("%s",str)!=EOF ){
+        int n1=strlen(str);
+        //getchar();
+        for(int i=0;i<27;i++){
+            for(int j=0;j<=n1;j++){
+                if(s[i]==str[j] || str[j]==a[i]){
+                    re[i]++;
+                }
+            }
+        }
+        for(int i=0;i<26;i++){
+            printf("%c:%d\n",s[i],re[i]);
+        }
+    }   
+    return 0;
+}
