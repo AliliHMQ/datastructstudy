@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int max(double a[], int n, int re) {
+    if (n == 0) {
+        return re;
+    }
+    double tmp = a[re];
+    n--;
+    if (a[n] > tmp) {
+        re = n;
+    }
+    return max(a, n, re);
+}
+
+int main() {
+    double a[1010];
+    int n;
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        return 0;
+    }
+
+    for (int i = 0; i < n; i++) {
+        scanf("%lf", &a[i]);
+    }
+
+    int x0 = max(a, n, n - 1);
+    printf("%.3f %d\n", a[x0]+1e-8, x0);
+
+    return 0;
+}
