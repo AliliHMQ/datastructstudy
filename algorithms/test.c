@@ -1719,6 +1719,7 @@ int main(){
 */
 
 ////
+/*
 #include <stdio.h>
 
 int main(){
@@ -1831,7 +1832,7 @@ int main(){
     char a[27]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     /*for(int i=0;i<26;i++){
             printf("%c:\n",s[i]);
-        }*/
+        }
     int re[27]={0};
     char str[1010]={};
     getchar();
@@ -1882,6 +1883,21 @@ int main() {
 
     int x0 = max(a, n, n - 1);
     printf("%.3f %d\n", a[x0]+1e-8, x0);
+
+    return 0;
+}
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node*next;
+}Node;
+
+int main(){
 
     return 0;
 }

@@ -1,5 +1,6 @@
 //结构体类型
 //队列基本操作
+/*
 #include <iostream>
 using namespace std;
 //定义一个结构体
@@ -32,3 +33,4 @@ int main(){
     
     return 0;
 }
+*/
