@@ -1,5 +1,5 @@
 //产生回文数
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 void solve(){
@@ -21,7 +21,7 @@ int main(){
     solve();
     return 0;
 }
-
+*/
 /*
 亲密数
 #include<iostream>
@@ -76,3 +76,38 @@ int main(void)
     return 0;
 }
 */
+
+//回文数判断
+//Palindromes _easy version HDU - 2029 
+#include <iostream>
+#include <string>   // 必须包含
+#include <cstdio>   // 若使用 printf 则必须包含
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+    while(n--){
+        string a;
+        cin>>a;
+        int x=a.size();
+        int j=x-1;
+        int re=0;
+        for(int i=0;i<x;i++){
+            if(a[i]==a[j]){
+                re=0;
+            }else{
+                re=1;
+                break;
+            }
+            j--;
+        }
+        if(re){
+            printf("no\n");
+        }else{
+            printf("yes\n");
+        }
+    }
+    
+    return 0;
+}
