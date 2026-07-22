@@ -41,20 +41,9 @@ int main(){
     return 0;
 }*/
 
-//F - 食品采购 CodeForces - 1296B 
-/*分析，要让人类的花出去的钱最大化
-比如 10元花出10+10*0.1的效果 10~11
-那20元呢，先花10元得到1元 第二轮在画10元得到1元 一共是22元
-但是一起花呢，花20元得到2元 一共22元，一样的
 
-区别在于，28元，分整数花，回报2元 之后10元变成11元 一共花成31元效果
-那么 37——41
-199 先花100 回10元再花100 回10元 再花10回1 再花10回1 一共221 花去的加上最后回的
 
-从高到低，依次累加，对每次花出去的金额求和，加上最后一次回的
-*/
-//方法一 公式法
-/*
+//J - 显示号码 
 #include <iostream>
 using namespace std;
 
@@ -62,36 +51,22 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int s;
-        cin>>s;
-        long long ans=0;
-        ans=s+(s-1)/9;
-        cout<<ans<<endl;
-    }
-    return 0;
-}*/
-/*方法二，进行模拟
-每次花掉最大的 10 的倍数
-（即 s / 10 * 10），返现 s / 10，更新余额，
-直到余额小于 10，最后把剩余的钱全部花掉。
-*/
-
-#include <iostream>
-using namespace std;
-
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        long long s=0,ans=0;
-        cin>>s;
-        while(s>=10){
-            long long spend=(s/10)*10;
-            ans+=spend;
-            s=s-spend+spend/10;
+        int x;
+        cin>>x;
+        if(x%2==0){
+            int j=x/2;
+            for(int i=0;i<j;i++){
+                cout<<'1';
+            }
+            cout<<endl;
+        }else{
+            
+            cout<<'7';
+            for(int i=0;i<(x-3)/2;i++){
+                cout<<'1';
+            }
+            cout<<endl;
         }
-        ans+=s;
-        cout<<ans<<endl;
     }
     return 0;
 }

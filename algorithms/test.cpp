@@ -1,158 +1,54 @@
-/*#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(){
-    int q[10];
-    for(int i=0;i<10;i++){
-        cin >> q[i];
-    }
-    for(int i=0;i<10;i++){
-        cout << q[i];
-        if(i<9){
-            cout << " ";
-        }
-    }
-    printf("\n");
-    for(int i=9;i>=0;i--){
-        cout << q[i];
-        if(i>0){
-            cout << " ";
-        }
-    }
-    return 0;
-}*/
-/*#include <iostream>
-using namespace std;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-int main(){
-    int n;
-    cin >> n;
-    int q[n];
-    for(int i=0;i<n;i++){
-        cin >> q[i];
-    }
-    for(int i=0;i<n;i++){
-        if(q[i]>=3){
-            int x=q[i]/3;
-            int m=q[i]%3;
-            if(m==0){
-                printf("%d %d %d",x,x,x);
-            }else if(m==1){
-                printf("%d %d %d",x,x,x+1);
-            }else{
-                printf("%d %d %d",x,x+1,x+1);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        string s;
+        cin>>n>>s;
+
+        map<pair<int,int>,int> left; //子串l坐标
+        left[{0,0}]=0; //原点初始化
+
+        int x=0,y=0;
+        int ansl=-1,ansr=-1;
+        int best=n+1;
+
+        for(int i=1;i<=n;i++){
+            char c=s[i-1];  //从后往前开始记录走法
+            if(c=='L') x--;
+            else if(c=='U') y++;
+            else if(c=='D') y--;
+            else if(c=='R') x++;
+
+            pair<int,int> cur={x,y};
+
+            auto it=left.find(cur);
+
+            if(it!=left.end()){ //在遍历完之前就已经找到了一个一样的坐标位置
+                int l=it->second+1;
+                int r=i;
+                int len=r-l+1;
+
+                if(len<best){  //判断子串长度，随便选一个要小于原来字符串长度
+                    best=len;
+                    ansl=l;
+                    ansr=r;
+                }
             }
+            left[cur]=i; //添加进去 这一点坐标对应的字符串序号
+        }
+        if(ansl==-1){
+            cout<<-1<<endl;
         }else{
-            printf("-1");
+            cout<<ansl<<' '<<ansr<<endl;
         }
-        printf("\n");
-    }
-    return 0;
-}*/
-
-/*#include <iostream>
-using namespace std;
-
-int main(){
-    long long n;
-    cin >> n;
-    int q[n];
-    for(int i=0;i<n;i++){
-        cin >> q[i];
-    }
-    for(int i=0;i<n;i++){
-        if(q[i]<3){
-            printf("-1\n");
-        }else{
-            printf("1 1 %d",q[i]-2);
-        }
-    }
-    
-    return 0;
-}*/
-
-//字符串输入
-/*#include <iostream>
-#include <cstring>
-using namespace std;
-
-int main(){
-
-    return 0;
-}*/
-
-//斐波那契数列
-/*#include <iostream>
-using namespace std;
-
-int fei(int n){    //求第 10 个rabbit数  //从0开始
-    int q[n+1];   //在第 q[11]数组 的最后一个 q[10];
-    q[0]=1,q[1]=1; //零与一都是 1  
-    for(int i=2;i<n+1;i++){                     //注意数组指针 0~(数组容量-1);
-        q[i]=q[i-1]+q[i-2];
-    }
-    return q[n];  //第 n 个 rabbit 数
-}
-
-int main(){
-    int n;
-    scanf("%d",&n);
-    for(int i=0;i<n;i++){
-        int x;
-        scanf("%d",&x);
-        int re=fei(x);  //第 n 个rabbit 数
-        printf("%d\n",re);
-    }
-    return 0;
-}*/
-
-//字符串打印  HPU
-#include <iostream>
-using namespace std;
-
-int main(){
-    char x;
-    scanf("%c",&x);
-    if(x=='H'){
-        cout<<"*   *"<<endl;
-        cout<<"*   *"<<endl;
-        cout<<"*****"<<endl;
-        cout<<"*   *"<<endl;
-        cout<<"*   *"<<endl;
-    }else if(x=='P'){
-        cout<<"**** "<<endl;
-        cout<<"*   *"<<endl;
-        cout<<"**** "<<endl;
-        cout<<"*    "<<endl;
-        cout<<"*    "<<endl;
-    }else{
-        cout<<"*   *"<<endl;
-        cout<<"*   *"<<endl;
-        cout<<"*   *"<<endl;
-        cout<<"*   *"<<endl;
-        cout<<" *** "<<endl;
-    }
-    return 0;  
-}
-
-//数组水题
-#include <iostream>
-using namespace std;
-
-int main(){
-    int n;
-    cin >> n;
-    while(n--){
-        int m;
-        cin >> m;
-        int n[1001];
-        int re=0;
-        for(int i=0;i<m;i++){
-            int x;
-            cin >> x;
-            re+=x;
-        }
-        printf("%d\n",re);
     }
     return 0;
 }
