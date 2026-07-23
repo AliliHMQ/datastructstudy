@@ -336,7 +336,7 @@ int main(){
     int n;
     cin>>n;
 
-    priority_queue<int, vector<int>, greater<int>> pq;
+    priority_queue<int, vector<int>, greater<int>> pq;  //从小到大哦
 
     for(int i=0;i<n;i++){
         int x;
@@ -352,5 +352,393 @@ int main(){
         pq.push(sum);         //合并过后的一堆放进总和
     }
     cout<<ans<<endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+//********************* test **************************//
+
+/*A - 小鱼的数字游戏 洛谷 - P1427 */
+
+/*
+1.一行内输入一串整数，以 0 结束，以空格间隔。
+2.一行内倒着输出这一串整数 长度不一定
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    vector<int> a;
+    int x;  
+    while(cin>>x){
+        if(x==0) break;
+        a.push_back(x);
+    }
+    for(int i=(int)a.size()-1;i>=0;i--){   //当 a 为空时，a.size()-1 是无符号数
+        cout<<a[i]<<" ";
+    }
+    return 0;
+}
+
+
+/* B - Increasing CodeForces - 1742B */
+
+/*
+给定一个由 n 个正整数组成的数组 a。通过重新排列元素，确定是否可以使数组严格递增
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<int> a(n);
+        for(int &x:a) cin>>x;
+        sort(a.begin(),a.end());
+        
+        int re=0;
+        for(int i=1;i<n;i++){
+            if(a[i-1]==a[i]){
+                re=1;
+                break;
+            }
+        }
+        if(!re){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+        
+    }
+    
+    return 0;
+}
+
+
+
+
+/*C - Number Replacement CodeForces - 1744A */
+
+/* 
+小提示：要建立数字和字符的一一映射关系，可以使用map<int, char>
+*/
+
+//那就边输入边加入pair吧
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+
+        vector<int> a(n);
+        map<int,char> m;
+        for(int &x:a) cin>>x;
+        string s;
+        cin>>s;
+        
+        int re=0;
+        for(int i=0;i<n;i++){
+            int num=a[i];
+            char c=s[i];
+            if(m.count(num)){
+                if(m[num]!=c){
+                    re=1;
+                    break;
+                }
+            }else{
+                m[num]=c;
+            }
+        }
+
+        if(re){
+            cout<<"NO"<<endl;
+        }else{
+            cout<<"YES"<<endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+/*D - Ten Words of Wisdom CodeForces - 1850B */
+
+/*
+只能拿重量小于等于10的神剑
+想要尽可能拿走神力高的
+
+结构体排序，
+
+然后是n行，其中的i行包含两个整数ai和bi（1 ≤ ai, bi ≤ 50）--分别是第i把剑的重量和神力
+*/
+
+//方法一 直接遍历
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int ans=-1,shen=-1;
+        for(int i=0;i<n;i++){
+            int x,y;
+            cin>>x>>y;
+            if(x<=10){
+                if(y>shen){
+                    shen=y;
+                    ans=i;
+                }
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+
+//训练方法 map
+
+
+/*E - Array Coloring CodeForces - 1857A */
+
+/*
+给定一个由n个整数组成的数组
+您的任务是确定是否有可能以两种颜色为其所有元素上色，
+从而使两种颜色的元素的和具有相同的奇偶性，
+并且每种颜色至少有一个元素上色。
+
+奇+奇=偶
+偶+偶=偶 奇+偶=奇  偶数不影响奇偶性
+
+数组分为两组 每组之和奇偶性相同 
+小提示：判断奇数偶数个数就行
+
+奇数个奇数 绝对不可能分好
+偶数个奇数 可以分好
+
+奇数个偶数的话 加到两边不影响奇偶性
+偶数个偶数的话 加到两边更加不影响奇偶性
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+
+        int x=0;
+        for(int i=0;i<n;i++){
+            int num;
+            cin>>num;
+            if(num%2!=0){
+                x++;
+            }
+        }
+        if(x%2!=0){
+            cout<<"NO"<<endl;
+        }else{
+            cout<<"YES"<<endl;
+        }
+    }
+    return 0;
+}
+
+
+
+/*F - Is It a Cat? CodeForces - 1800A */
+
+/*
+字符串 "meow", "mmmEeOWww", "MeOooOw" 描述的是一只猫在喵喵叫
+判断你听到的声音是一只猫在喵喵叫还是其他什么声音。
+
+小提示：把一个字符转换为小写可以使用tolower()函数。在本题中，连续相同的字符会干扰我们的判断。
+想想办法把mmmmmeeeeoowww化成简单的meow。
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<char> a(n);
+        
+        for(char &x:a) cin>>x;
+        for(int i=0;i<n;i++){
+            a[i]=tolower(a[i]);         //转换成大写
+        }
+        a.erase(unique(a.begin(),a.end()),a.end());
+        string res;
+        for(int i=0;i<a.size();i++){
+            res+=a[i];
+        }
+        string s1="meow";
+        if(res==s1){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+/*G - Parity Sort CodeForces - 1851B */
+
+/*
+特殊排序
+将两个元素 ai 和 aj 对调，使得 i ≠ j、ai 和 aj 要么都是偶数，要么都是奇数
+
+确定是否有可能通过执行任意次数（可能为零）的操作对数组进行
+非递减排序。 递增排序
+
+我知道，分三组 原数组排序得到第一组 
+偶数组排序得到第二组 奇数组排序得到第三组 
+但是要放回去看看是否一致
+*/
+
+/*
+更进一步 你可以这样思考
+
+复制原数组，排序得到 b。
+依次比较每个位置：
+如果 a[i] 是奇数，但 b[i] 是偶数，就失败。
+如果 a[i] 是偶数，但 b[i] 是奇数，也失败。
+
+全部通过就输出 YES，否则 NO。         好聪明，性质一致也是一种很好的判断方式1，相较于细节化地考虑操作步骤，只看变化前后两个状态就能完成判断最厉害了
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<int> a(n);
+        for(int &x:a) cin>>x;
+
+        vector<int> b(n);
+        for(int i=0;i<n;i++){
+            b[i]=a[i];
+        }
+        sort(a.begin(),a.end());
+        int re=0;
+        for(int i=0;i<n;i++){
+            if(a[i]%2!=b[i]%2){
+                re=1;
+                break;
+            }
+        }
+        if(!re){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+/*H - Balanced Round CodeForces - 1850D */
+
+/*
+1.按顺序排列才能使最后的差值均为最小 
+之后再和k进行比较遇到第一个大于k的差值对左右两边的数数目计算 
+去掉最短的一列 如果一直没有，就输出0
+
+但关键问题是：最终能保留的数，只能来自某一个连续段，而不是在每个裂缝处二选一。
+找最长连续段，而不是每次遇到裂缝就累加删除数
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        
+        vector<int> a(n);
+        //vector<int> b(n);
+
+        for(int &x:a) cin>>x;
+        sort(a.begin(),a.end());
+
+        /*
+        for(int i=1;i<n;i++){
+            b[i]=a[i]-a[i-1];
+        }*/
+
+        int re=0;
+        int len=1;
+        int maxlen=1;
+        for(int i=1;i<n;i++){
+            if(a[i]-a[i-1]<=k){
+                len++;
+            }else{
+                if(len>maxlen){
+                    maxlen=len;
+                }
+                len=1;              //重置为1
+            }
+        }
+        //循环结束后处理最后一段len
+        maxlen=max(maxlen,len);
+
+        if(maxlen==n){
+            re=0;
+        }else{
+            re=n-maxlen;
+        }
+        cout<<re<<endl;
+    }
+
     return 0;
 }
