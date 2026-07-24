@@ -662,18 +662,34 @@ Bob	  0	0	57(5)	0	0	168	-7	0
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 struct stu{
     string name;
-    int ac;
-    int tim;
+    int ac=0;
+    int tim=0;
+
+    // 默认构造函数（可选，但为了安全）
+    /*
+    stu() : name(""), ac(0), tim(0) {}
+    // 带参数的构造函数
+    stu(const string& n, int a, int t) : name(n), ac(a), tim(t) {}
+    */
 };
 
 bool cmp(const stu&a,const stu&b){
     if(a.ac!=b.ac) return a.ac>b.ac;
-    if(a.tim!=b.tim) return a.tim<b.tim;
-    return a.name>b.name;
+    else if(a.tim!=b.tim) return a.tim<b.tim;
+    return a.name<b.name;
+}
+
+int zhuan(string a,int x,int y){
+    int re=0;
+    for(int i=x;i<y;i++){
+        re=re*10+a[i]-'0';
+    }
+    return re;
 }
 
 int main(){
@@ -681,22 +697,43 @@ int main(){
     cin>>n>>m;
     string nam;
     vector<stu> people;
-    while(cin>>nam){
+while(cin>>nam){
+    int time=0,nac=0;
+    for(int ai=0;ai<n;ai++){
         string a;
         cin>>a;
-        if(a[0]=='-'){
-            break;
+        if(a[0]=='-' || a[0]=='0'){
+            continue;
         }
         int re=0;
+        int re1=0;
+        int re2=0;
         for(int i=0;i<a.size();i++){
             if(a[i]=='('){
                 re=1;
+                re1=i;
+            }
+            if(a[i]==')'){
+                re2=i;
             }
         }
-        int x,y;
+        int x=0,y=0;
         if(re){
-            
+            nac++;
+            x=zhuan(a,0,re1);
+            y=zhuan(a,re1+1,re2);
+        }else{
+            nac++;
+            x=zhuan(a,0,a.size());
         }
+        time+=x;
+        time+=y*m;
+    }
+    people.push_back({nam, nac, time});
+}
+    //sort(people.begin(),people.end(),cmp);
+    for(int i=0;i<people.size();i++){
+        cout << left << setw(10) << people[i].name << " " << right << setw(2) << people[i].ac << " " << right << setw(4) << people[i].tim << endl;
     }
 
 
@@ -728,5 +765,54 @@ int main(){
         }
         cout<<endl;
     }
+    return 0;
+}
+
+
+/*J - 排序 HDU - 1106 */
+
+/*
+输入一行数字，
+如果我们把这行数字中的‘5’都看成空格，
+那么就得到一行用空格分割的若干非负整数
+*/
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int zhuan1(string& a,int x,int y){
+    int re=0;
+    for(int i=x;i<y;i++){
+        re=re*10+a[i]-'0';
+    }
+    return re;
+}
+
+int main(){
+    string a;
+    while(cin>>a){
+        vector<int> num;
+        int start=0;                        //注意首尾下标改成 start 一个去判断就可以去掉5555为空格的情况
+        for(int i=0;i<a.size();i++){
+            if(a[i]=='5'){
+                if(start<i){
+                    num.push_back(zhuan1(a,start,i));
+                }
+                start=i+1;
+            }
+        }
+        if(start<a.size()){
+            num.push_back(zhuan1(a,start,a.size()));
+        }
+        sort(num.begin(),num.end());
+        for(int i=0;i<num.size();i++){
+            cout<<num[i]<<" ";
+        }
+        cout<<endl;
+    }
+
     return 0;
 }

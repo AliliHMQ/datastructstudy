@@ -8,13 +8,15 @@ int binary_search(int q[],int l,int r,int target){
         int mid=(l+r) >> 1;
         if(q[mid]==target){
             return mid;
-        }else if(q[mid]>target){
+        }else if(q[mid]>target){        // 这里因为 mid 不 可 能 是 答 案 了 ， 所 以 搜 索 范 围 都 需 要 将 mid 排除
             r=mid-1;
         }else{
             l=mid+1;
         }
     }
 }
+
+
 int main(){
     int n;
     scanf("%d",&n);
@@ -29,10 +31,3 @@ int main(){
     return 0;   
 }
 
-#include <iostream>
-using namespace std;
-
-int main(){
-    
-    return 0;
-}
