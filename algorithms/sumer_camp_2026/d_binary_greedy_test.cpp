@@ -1,6 +1,3 @@
-
-
-
 /*****************二分********************/
 /*在二分搜索过程中，每次都把查找的区间减半，因此对于一个长
 度为 n 的数组，至多会进行 log(n) 次查找。*/
@@ -128,7 +125,7 @@ int main(){
 
 
 
-//果然还是使用方程最快了 数学系很的好有用
+//果然还是使用方程最快了 数学很好用
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -426,10 +423,12 @@ int main(){
 }
 
 /*正确贪心策略*/
+/**************双指针*****************/
 /*
 每一步，设当前剩余字符串为 S（从位置 l 到 r），将其与逆序 reverse(S) 比较
 */
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 using namespace std;
 
 int main(){
@@ -447,7 +446,7 @@ int main(){
     }
     string result;
     int l=0,r=N-1;
-    while(l<=r){
+    while(l<=r){                   
         string s1,s2;
         for(int i=l;i<=r;i++){
             s1+=name[i];
@@ -455,10 +454,12 @@ int main(){
         for(int i=r;i>=l;i--){
             s2+=name[i];
         }
-        if(s1>=s2){
-            result+=l;
+        if(s1<s2){
+            result+=s1[0];
+            l++;
         }else{
-            result+=r;
+            result+=s2[0];
+            r--;
         }
     }
     for (size_t i = 0; i <result.length(); i += 80) {
@@ -467,6 +468,35 @@ int main(){
     
     return 0;
 }
+
+
+/*E - The Frog's Games*/
+
+/*
+1.河的宽度为 L（1 ≤ L ≤ 1,000,000,000）   //好大的数据
+2.河中有 n（0 ≤ n ≤ 500,000）块石头
+3.青蛙只能跳着过河，但可以落在石头上。
+如果掉进河里，就会被淘汰。
+4.如果要成功跳过河，他们至少需要具备多大的跳跃能力
+（即青蛙的最长跳跃距离）
+
+三个正整数 L、n 和 m。接下来 n 行，
+每行给出一个整数，表示该石头距离起始岸边的距离。
+*/
+#include <iostream>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*****************贪心+二分*****************/
 

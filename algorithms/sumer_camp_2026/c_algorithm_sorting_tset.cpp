@@ -10,13 +10,13 @@ const int N=5;
 
 struct Node{
     int n;
-    bool operator<(const Node &other) const{         //operator。这是 C++ 关键字，必须完全正确拼写
+    bool operator<(const Node &other) const{         //operator。这是 C++ 关键字，必须完全正确拼写 重载排序
         return n<other.n;
     }
 };
 
 bool cmp(const Node &a,const Node &b){
-    return a.n>b.n;                         //降序       
+    return a.n>b.n;                         //降序    手写排序   
 }
 
 int main(){
