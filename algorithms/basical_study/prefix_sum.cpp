@@ -25,6 +25,8 @@ int main(){
     //这个东西的作用就是输入输出不同步，cin速度变快
     //数据大于10,000,000 用scanf而不是cin
     ios::sync_with_stdio(false); //不能使用scanf了 
+
+
     cin >> n >> m;
     for(int i=1;i<=n;i++)  scanf("%d",&a[i]);//初始化 这里首元就是1
 
@@ -38,8 +40,8 @@ int main(){
     }
 
     return 0;
-}
-*/
+}*/
+
 
 //二维前缀和 左上角方块全部的和
 #include <iostream>

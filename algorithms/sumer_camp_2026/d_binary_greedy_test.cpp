@@ -168,6 +168,45 @@ int main(){
     return 0;
 }
 
+////////////////////////////////////////////////////////////////////////////////////again
+#include <iostream>
+using namespace std;
+
+long long check(long long mid){
+    long long re=0;
+    while(mid>0){
+        mid/=5;
+        re+=mid;
+    }
+    return re;
+}
+
+int main(){
+    int t;
+    cin>>t;
+    for(int i=1;i<=t;i++){
+        long long Q;
+        cin>>Q;
+
+        long long l=0,h=5*Q;              //找数
+        long long re=0;
+        while(l<h){              //整数二分不加等号，相等时候退出循环吗
+            long long mid=(l+h)>>1;
+            if(check(mid)<Q){
+                l=mid+1;         //完全不符合的mid直接跳过 l变成mid+1及以上
+            }else{
+                h=mid;           //此时后缀0数目大于等于Q 保持到mid及mid以下  之后一段连续的0的话，那么l不变，这个做到了h用mid一直向l推进，确保寻找到最小值
+            }
+        }
+        re=l;                    //l==h的时候出来 这里要是确保到最小值的话
+        if(check(re)==Q){
+            cout<<"Case "<<i<<": "<<re<<endl;
+        }else{
+            cout<<"Case "<<i<<": "<<"impossible"<<endl;
+        }
+    }
+    return 0;
+}
 
 
 
