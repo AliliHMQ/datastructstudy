@@ -349,11 +349,13 @@ int main(){
 */
 
 //枚举去掉的数然后对每次产生的前缀和数组找最大值
+//b的操作上是固定的，他一定会这么干，那么对于a来说想要达到最大值，肯定是能够预判b的操作了，那么很重要的一点来了
+//a操作目标的最大值直接就能够转化成全局最大值，那么很好，对a进行分析就好了
 
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N=1e4+10;
+const int N=1e6+10;
 long long sum[N];
 
 int main(){
@@ -363,14 +365,22 @@ int main(){
         int n,k,x;
         cin>>n>>k>>x;
         vector<int> a;
+        a.push_back(0);
         for(int i=1;i<=n;i++){
-            cin>>a[i];
+            int x;
+            cin>>x;
+            a.push_back(x);
         }
-        bool f=1;
+
+        sort(a.begin()+1,a.end());
+        for(int i=1;i<=n;i++){
+            sum[i]=sum[i-1]+a[i];
+        }
+
+        bool f=1;                        //很棒学会做标记了
         long long re=0;
-        sort(a.begin(),a.end());
         for(int i=0;i<=k;i++){
-            long long nsum=sum[n-i]-2*(sum[n-i]-sum[max(0,n-i-x)]);
+            long long nsum=sum[n-i]-2*(sum[n-i]-sum[max(0,n-i-x)]);       //这里再细细深思一下
             if(f || re<nsum){
                 re=nsum;
                 f=0;
