@@ -1,4 +1,149 @@
 //2026-6：Dijkstra+Floyd
+#include <stdio.h>
+#include <limits.h> // 用于 INT_MAX（代表无穷大）
+
+#define V_NUM 7    // 顶点总数（v0~v6）
+#define INF INT_MAX // 用int最大值表示无穷大
+
+/* -------------------------- 子函数声明 -------------------------- */
+// 1. 初始化邻接矩阵（根据题目给的图）
+void initGraph(int graph[V_NUM][V_NUM]);
+// 2. Dijkstra 核心算法（从源点v0出发）
+void dijkstra(int graph[V_NUM][V_NUM], int start, int dist[V_NUM], int prev[V_NUM]);
+// 3. 打印最终结果（最短路径长度 + 路径）
+void printResult(int dist[V_NUM], int prev[V_NUM], int start);
+// 4. 辅助：打印从源点到目标点的路径（递归回溯）
+void printPath(int prev[V_NUM], int target);
+
+/* -------------------------- 主函数 -------------------------- */
+int main() {
+    int graph[V_NUM][V_NUM]; // 邻接矩阵
+    int dist[V_NUM];         // 存储v0到各点的最短距离
+    int prev[V_NUM];         // 存储路径前驱结点，用于回溯路径
+
+    // 1. 初始化图
+    initGraph(graph);
+
+    // 2. 执行Dijkstra算法，源点为v0（编号0）
+    dijkstra(graph, 0, dist, prev);
+
+    // 3. 打印结果
+    printf("===== 从v0出发的最短路径结果 =====\n");
+    printResult(dist, prev, 0);
+
+    return 0;
+}
+
+/* -------------------------- 子函数实现 -------------------------- */
+
+/**
+ * @brief 初始化邻接矩阵，根据题目中的图设置权值
+ * @param graph 邻接矩阵数组
+ */
+void initGraph(int graph[V_NUM][V_NUM]) {
+    // 第一步：全部初始化为 INF（无边）
+    for (int i = 0; i < V_NUM; i++) {
+        for (int j = 0; j < V_NUM; j++) {
+            graph[i][j] = INF;
+        }
+        graph[i][i] = 0; // 自己到自己的距离为0
+    }
+
+    // 第二步：按图设置边的权值
+    // v0
+    graph[0][1] = 13;
+    graph[0][2] = 8;
+    graph[0][6] = 32;
+    // v1
+    graph[1][5] = 9;
+    graph[1][6] = 7;
+    // v2
+    graph[2][3] = 5;
+    // v3
+    graph[3][4] = 6;
+    // v4
+    graph[4][0] = 30;
+    graph[4][5] = 2;
+    // v5
+    graph[5][6] = 17;
+}
+
+/**
+ * @brief Dijkstra算法实现，求start到所有点的最短路径
+ * @param graph 邻接矩阵
+ * @param start 源点编号
+ * @param dist 输出：各点到源点的最短距离
+ * @param prev 输出：各点的前驱结点，用于回溯路径
+ */
+void dijkstra(int graph[V_NUM][V_NUM], int start, int dist[V_NUM], int prev[V_NUM]) {
+    int visited[V_NUM] = {0}; // 标记结点是否已确定最短路径（S集合）
+
+    // 1. 初始化dist数组：dist[i] = graph[start][i]
+    for (int i = 0; i < V_NUM; i++) {
+        dist[i] = graph[start][i];
+        prev[i] = (dist[i] != INF && dist[i] != 0) ? start : -1; // 前驱结点初始化为start（可达的）
+    }
+    visited[start] = 1; // 源点直接加入S集合
+    dist[start] = 0;    // 源点到自己距离为0
+
+    // 2. 循环V_NUM-1次，每次选一个结点加入S集合
+    for (int i = 1; i < V_NUM; i++) {
+        // --- 步骤1：从T集合中找距离最小的结点u ---
+        int u = -1;
+        int minDist = INF;
+        for (int j = 0; j < V_NUM; j++) {
+            if (!visited[j] && dist[j] < minDist) {
+                minDist = dist[j];
+                u = j;
+            }
+        }
+
+        if (u == -1) break; // 没有可达结点了，提前退出
+        visited[u] = 1;     // 加入S集合
+
+        // --- 步骤2：用u作为中间结点，更新T集合中结点的距离 ---
+        for (int v = 0; v < V_NUM; v++) {
+            // 如果v未被访问，且u到v有边，且经过u的路径更短
+            if (!visited[v] && graph[u][v] != INF && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v]; // 更新距离
+                prev[v] = u;                     // 更新前驱结点
+            }
+        }
+    }
+}
+
+/**
+ * @brief 递归打印从start到target的路径
+ * @param prev 前驱结点数组
+ * @param target 目标结点
+ */
+void printPath(int prev[V_NUM], int target) {
+    if (prev[target] == -1) {
+        printf("v%d", target);
+        return;
+    }
+    printPath(prev, prev[target]);
+    printf(" -> v%d", target);
+}
+
+/**
+ * @brief 打印所有结点的最短距离和路径
+ * @param dist 最短距离数组
+ * @param prev 前驱结点数组
+ * @param start 源点
+ */
+void printResult(int dist[V_NUM], int prev[V_NUM], int start) {
+    for (int i = 0; i < V_NUM; i++) {
+        printf("v%d -> v%d: 距离 = ", start, i);
+        if (dist[i] == INF) {
+            printf("不可达\n");
+        } else {
+            printf("%-3d 路径: ", dist[i]);
+            printPath(prev, i);
+            printf("\n");
+        }
+    }
+}
 
 /* 模板 */
 
@@ -498,7 +643,7 @@ int main(){
     while(m--){
         int a,b,w;
         cin>>a>>b>>w;
-        e[a][b]=min(e[a][b],w);
+        e[a][b]=min(e[a][b],w);  //处理重边！！！！
     }
     cout<<Dijkstra(1);
     return 0;
@@ -553,3 +698,516 @@ int main(){
     else cout<<dist[n]<<endl;
     return 0;
 }
+
+
+
+/* test 2 */
+
+/* C - Chocolate Giving S */
+
+/*
+* 1.两次最短一定是全局最短，一定会经过农场 1
+* 2.调用两次dijskra 堆化版本
+
+* 1.两次最短一定是全局最短，一定会经过农场 1
+问题进行转化，将农场1作为起点，dist数组只有一个固定下来！
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> PII;
+
+const int N=5e4+10;
+int n,m;
+vector<vector<PII>> g(N);
+long long dist[N];
+bool st[N];
+
+priority_queue<PII,vector<PII>,greater<PII>> pq;
+
+void dijkstra(int s){
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    dist[s]=0;
+    pq.push({0,s});
+
+    while(!pq.empty()){
+        auto [mn,id]=pq.top();
+        pq.pop();
+        if(st[id]) continue;
+        st[id]=1;
+
+        for(auto [to,w]:g[id]){
+            if(dist[to]>dist[id]+w){
+                dist[to]=dist[id]+w;
+                pq.push({dist[to],to});
+            }
+        }
+    }
+}
+
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int num;
+    cin>>n>>m>>num;
+    while(m--){
+        int a,b,w;
+        cin>>a>>b>>w;
+        g[a].push_back({b, w});   //依次添加在队尾，相同也不会覆盖掉，图的所有边
+        g[b].push_back({a, w});
+    }
+    dijkstra(1);          //！！！（问题转化）图是固定下来的，选择农场为起点，在无向图里面直接加就好了，也就是说dist数组只有一个
+    while(num--){
+        int x,y;
+        cin>>x>>y;
+        cout<<dist[x]+dist[y]<<endl;
+    }
+
+    return 0;
+}
+
+
+/* E - 【模板】单源最短路2 */
+/* 数据在 N=5010 可以使用朴素版
+无重边或自环,无负数
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<long long,int> PII;
+
+const int N=50010;
+int n,m;
+vector<vector<PII>> g(N);
+long long dist[N];
+bool st[N];
+
+priority_queue<PII,vector<PII>,greater<PII>> pq;
+
+void dijkstra(int s){
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    dist[s]=0;
+    pq.push({0,s});
+
+    while(!pq.empty()){
+        auto [mn,id]=pq.top();
+        pq.pop();
+        if(st[id]) continue;
+        st[id]=1;
+
+        for(auto [to,w]:g[id]){
+            if(dist[to]>dist[id]+w){
+                dist[to]=dist[id]+w;
+                pq.push({dist[to],to});
+            }
+        }
+    }
+}
+
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    cin>>n>>m;
+    while(m--){
+        int a,b,w;
+        cin>>a>>b>>w;
+        g[a].push_back({b, w});   //依次添加在队尾，相同也不会覆盖掉，图的所有边
+        g[b].push_back({a, w});
+    }
+    dijkstra(1);       
+    //dist 是 long long 数组
+    if(dist[n]==0x3f3f3f3f3f3f3f3f){
+        cout<<-1<<endl;
+    }else{
+        cout<<dist[n]<<endl;
+    }
+    return 0;
+}
+
+
+
+/* G - 租用游艇 */
+
+//Floyd Warshal算法模板
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+//从游艇出租站 1 到 n 所需的最少租金。
+
+const int N=210;
+int g[N][N];
+int n;
+
+int main(){
+    memset(g,0x3f,sizeof g);
+    cin>>n;
+    for(int i=1;i<n;){
+        for(int j=i+1;j<=n;j++){
+            cin>>g[i][j];
+        }
+        i++;
+    }
+
+    for(int k=1;k<=n;k++){
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                g[i][j]=min(g[i][j],g[i][k]+g[k][j]);  //注意这里的向量很容易写错
+            }
+        }
+    }
+
+    cout<<g[1][n]<<endl;
+
+    return 0;
+}
+*/
+
+/* H - 邮递员送信 */
+
+//因此所有的道路都是单行的
+
+//这个邮递员每次只能带一样东西，
+//并且运送每件物品过后必须返回邮局。
+//分析得出是以邮局为定点的 Dijkstra算法 用堆和矩阵都可以 用堆吧，复习一下
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef pair<int,int> PII;
+
+const int N=1e3+10;
+int n,m;
+vector<vector<PII>> g(N);
+int dist[N];
+bool st[N];
+priority_queue<PII,vector<PII>,greater<PII>> pq;
+
+void dijkstra(int s){
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    dist[s]=0;
+    pq.push({0,s});
+    while(!pq.empty()){
+        auto[mn,id]=pq.top();
+        pq.pop();
+        if(st[id]) continue;
+        st[id]=1;
+
+        for(auto [to,w]:g[id]){
+            if(dist[to]>dist[id]+w){
+                dist[to]=dist[id]+w;
+                pq.push({dist[to],to});
+            }
+        }
+    }
+
+}
+
+int main(){
+    cin>>n>>m;
+    while(m--){
+        int a,b,w;
+        cin>>a>>b>>w;
+        g[a].push_back({b,w});
+    }
+    dijkstra(1);
+    long long re=0;
+    for(int i=2;i<=n;i++){
+        //不能简单相乘，同一条路不能有来有回
+        re+=dist[i];  //出去的路程
+    }
+    for(int i=2;i<=n;i++){            //这里其实是改变了初始点，每次回去为源点到 邮局 的最短距离
+        dijkstra(i);                  //其实真的很害怕调用这么多次，不过效果看上去还是可以的，过了
+        re+=dist[1];
+    }
+    cout<<re<<endl;
+    return 0;
+}
+//不过呢，在这里时间超限了。。。
+
+/*
+回程：从每个节点 i 回到邮局 1 的最短路径，
+等价于在反向图（所有边反向）上
+
+从 1 到每个节点 i 的最短路径。
+因此只需再对反向图运行一次 Dijkstra，得到 dist2[i]。
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef pair<int,int> PII;
+
+const int N=1e3+10;
+int n,m;
+vector<vector<PII>> gra(N);   //正边图
+vector<vector<PII>> rg(N);   //反边图
+int dist[N];
+bool st[N];
+
+
+void dijkstra(int s,vector<vector<PII>> & g){
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    dist[s]=0;
+    priority_queue<PII,vector<PII>,greater<PII>> pq; //局部优先队列
+    pq.push({0,s});
+    while(!pq.empty()){
+        auto[mn,id]=pq.top();
+        pq.pop();
+        if(st[id]) continue;
+        st[id]=1;
+
+        for(auto [to,w]:g[id]){
+            if(dist[to]>dist[id]+w){
+                dist[to]=dist[id]+w;
+                pq.push({dist[to],to});
+            }
+        }
+    }
+
+}
+
+int main(){
+    cin>>n>>m;
+    while(m--){
+        int a,b,w;
+        cin>>a>>b>>w;
+        gra[a].push_back({b,w});
+        rg[b].push_back({a,w});
+    }
+    dijkstra(1,gra);
+    long long re=0;
+    for(int i=2;i<=n;i++){
+        //不能简单相乘，同一条路不能有来有回
+        re+=dist[i];  //出去的路程
+    }
+    dijkstra(1,rg);
+    for(int i=2;i<=n;i++){
+        re+=dist[i]; 
+    }
+    
+    cout<<re<<endl;
+    return 0;
+}
+
+/* D - Cow Hurdles S */
+
+/*
+显然，对于一头奶牛跳过几个矮栏是很容易的，但是高栏却很难。
+于是，奶牛们总是关心路径上最高的栏的高度。
+
+1.奶牛的训练场中有 N 个站台
+2.所有站台之间有 M 条单向路径
+
+3.你的任务就是写一个程序，
+计算出路径上最高的栏的高度的最小值。
+
+第 i 行包含两个空格隔开的整数，表示任务 i 的起始站台和目标站台
+边权就变成了这一条路上 最大边的值 
+
+想法，再开一个high的数组，记录每次加到边里面最高的栏高度
+*/
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N=310;
+const int INF=0x3f3f3f3f;
+int g[N][N];
+int high[N];
+bool st[N];
+int n,m;
+
+void Dijkstra(int s){
+    fill(high, high + N, INF);
+    fill(st, st + N, false);
+    high[s] = 0;
+
+    for(int i=1;i<=n-1;i++){
+        int t=-1;
+        for(int j=1;j<=n;j++){
+            if(!st[j] && (t==-1 || high[j] < high[t])){
+                t=j;
+            }
+        }
+
+        for(int j=1;j<=n;j++){
+            if(!st[j] && g[t][j] < INF){
+                int x = max(high[t], g[t][j]);
+                high[j] = min(high[j], x);
+            }
+        }
+    }
+}
+
+int main(){
+    int t;
+    cin>>n>>m>>t;
+
+    while(m--){
+        int a,b,h;
+        cin>>a>>b>>h;
+        g[a][b]=h;
+    }
+    /*
+    *你的代码使用了每次查询单独运行一次改进版 Dijkstra 的做法，
+    *在数据范围（N=300, M=25000, T=40000）下会严重超时。
+    *同时代码还存在一些细节问题，导致输出可能不正确。
+    *下面指出问题并给出正确的解法。
+
+    *如果无法到达，输出 -1。无法完成
+    
+    while(t--){
+        int x,y;
+        cin>>x>>y;
+        Dijkstra(x);
+        cout<<high[y]<<endl;
+    }
+    
+    return 0;
+}
+
+*/
+
+//尝试用 Floyd解决 正确
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N=310;
+int g[N][N];
+const int INF=0x3f3f3f3f;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n,m,t;
+    cin>>n>>m>>t;
+    memset(g,0x3f,sizeof g);
+    //对角线初始化为0 防止起点终点为一致时候输出INF
+    for(int i=1;i<=n;i++) g[i][i]=0;
+
+    while(m--){
+        int a,b,h;
+        cin>>a>>b>>h;
+        g[a][b]=min(g[a][b],h);
+    }
+    for(int k=1;k<=n;k++){
+        for(int i=1;i<=n;i++){
+            if(g[i][k]==INF) continue;               //中转点特别高那就跳过
+            for(int j=1;j<=n;j++){
+                if(g[k][j]<INF){
+                    int x = max(g[i][k], g[k][j]);  //下一个可能方案里面的最大值
+                    g[i][j] = min(g[i][j], x);      //两个方案的最大值比较选择最小的那个
+                }
+            }
+        }
+    }
+    while(t--){
+        int x,y;
+        cin>>x>>y;
+        if(g[x][y]==INF) cout<<-1<<endl;
+        else cout<<g[x][y]<<endl;
+    }
+    return 0;
+}
+*/
+
+
+
+//dijstra算法基于贪心思想，当有负权边时，局部最优不一定是全局最优
+
+//Bellman 算法
+/*
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+const int N = 510, M = 10010;
+
+struct Edge { //使用结构体存储边，不用定义一大堆数组去加边
+    int a;
+    int b;
+    int w;
+} e[M];//把每个边保存下来即可
+int dist[N];
+int back[N];//备份数组防止串联
+int n, m, k;//k代表最短路径最多包涵k条边
+
+void bellman_ford() {
+    memset(dist, 0x3f, sizeof dist); //dist初始化位无穷，八字节3f3f3f3f大于1e9
+    dist[1] = 0;
+    for (int i = 0; i < k; i++) {//k次循环
+        memcpy(back, dist, sizeof dist);//
+        for (int j = 0; j < m; j++) {//遍历所有边，而dijkstra是遍历所有顶点n*n
+            int a = e[j].a, b = e[j].b, w = e[j].w;
+            dist[b] = min(dist[b], back[a] + w);
+            //使用backup:避免给a更新后立马更新b, 这样b一次性最短路径就多了两条边出来
+        }
+    }
+}
+
+int main() {
+    scanf("%d%d%d", &n, &m, &k);
+    for (int i = 0; i < m; i++) {
+        int a, b, w;
+        scanf("%d%d%d", &a, &b, &w);
+        e[i] = {a, b, w};
+    }
+    bellman_ford();
+    if(dist[n]>0x3f3f3f3f/2) puts("impossible");
+    else printf("%d",dist[n]);
+    return 0;
+}
+
+*/
+
+
+/* F - Job Hunt S */
+
+/*
+第 2 到第 P+1 行：第 i+1 行包含 2 个用空格分开的整数，
+表示一条从城市 Ai​  到城市 Bi 的单向路径。
+如果赚的钱也不会出现限制，就输出 −1
+
+就是路径最大值
+*/
+
+
+
+
+
+/* I - 赚钱 */
+//P 条单向路径连接 zzy 可以从任何一个城市出发开始赚钱，
+//分析
+
+/*
+1.图上面有环 且环的价值大于0，那么输出orz 
+2.如果没有输出dist数组最大值
+*/
+
+/*
+请求帮忙学习
+
+是的，这道题应该用 最长路 + 正环判定，
+也就是 Bellman-Ford / SPFA 的思路。
+*/
+
+
+/*
+Bellman_Ford算法
+1.初始化距离
+2.执行v-1轮松弛操作 遍历所有的边
+3.检测负权环 额外遍历一次检测
+*/
