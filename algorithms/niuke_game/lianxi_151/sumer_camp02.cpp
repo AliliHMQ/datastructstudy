@@ -105,7 +105,7 @@ int main(){
     // 当 i>a 时 floor(a/i)=0，因此只需遍历到 min(a,b)
     long long limit = min(a, b);
     __int128 total = 0;
-    long long i = 1;
+    long long i = 1;                        //必须是长整数类型
     while(i <= limit){
         long long v = a / i;                // 当前值
         long long last = a / v;             // 最大 j 使得 a/j == v
