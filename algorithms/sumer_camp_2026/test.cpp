@@ -1,46 +1,30 @@
 #include <bits/stdc++.h>
+#define debug cout<<"ok"<<endl
+typedef long long ll;
+const int maxn=1e7+10;
+const int mod=1e9+7;
 using namespace std;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    int n;
-    long long m;
-    cin >> n >> m;
-
-    vector<long long> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+int ans=-233333333,n,m,a,sum[maxn];
+deque<int>q;
+int main()
+{
+    scanf("%d%d",&n,&m);
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%d",&a);
+        sum[i]=sum[i-1]+a;//前缀和
     }
-
-    long long totalMod = 0;
-    for (long long x : a) {
-        totalMod = (totalMod + x % m + m) % m;
+    q.push_back(0);//赋初值
+    for(int i=1;i<=n;i++)
+    {
+        cout<<"第"<<i<<"轮";
+        while(q.front()+m<i)
+            q.pop_front();//越界就pop
+        ans=max(ans,sum[i]-sum[q.front()]);
+        while(!q.empty()&&sum[q.back()]>=sum[i])//递减就pop
+            q.pop_back();
+        q.push_back(i);
     }
-
-    vector<int> pos(m, -1);
-    pos[0] = 0;
-
-    long long pref = 0;
-    int bestDelete = n + 1;
-
-    for (int i = 1; i <= n; ++i) {
-        pref = (pref + a[i - 1] % m + m) % m;
-        int need = (pref - totalMod + m) % m;
-        if (pos[need] != -1) {
-            bestDelete = min(bestDelete, i - pos[need]);
-        }
-        pos[pref] = i;
-    }
-
-    if (bestDelete == n + 1 || bestDelete == n) {
-        cout << -1 << '\n';
-    } else {
-        cout << n - bestDelete << '\n';
-    }
-
+    printf("%d\n",ans);
     return 0;
 }
-
-
